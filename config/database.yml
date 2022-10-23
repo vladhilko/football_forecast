@@ -9,13 +9,16 @@
 # And be sure to use new-style password hashing:
 #   https://dev.mysql.com/doc/refman/5.7/en/password-hashing.html
 #
+
 default: &default
   adapter: mysql2
   encoding: utf8mb4
+  host: <%= ENV["DATABASE_HOST"] || '127.0.0.1' %>
+  password: <%= ENV["DATABASE_PASS"] || '' %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
-  password:
-  host: localhost
+  port: <%= ENV["DATABASE_PORT"] || '3307' %>
+  username: <%= ENV["DATABASE_USER"] || 'root' %>
+  reconnect: true
 
 development:
   <<: *default

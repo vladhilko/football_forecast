@@ -1,0 +1,17 @@
+version: '3.5'
+services:
+  mysql8:
+    image: mysql:8.0
+    container_name: mysql8
+    environment:
+      MYSQL_TCP_PORT: 3307
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    ports:
+      - "3307:3307"
+    expose:
+      - 3307
+    volumes:
+      - mysql8:/var/lib/mysql
+volumes:
+  mysql8:
+    driver: local
