@@ -1,36 +1,29 @@
 # README
 
-Football Forecast
+## Football Forecast
 
-rails s
 
-docker-compose up mysql8
+### Versions
 
+```rb
 ruby 3.1.2
 rails 7.0.4
 mysql 8.0.31
+```
 
-## __________________________
+### 1. Install Ruby
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+```bash
+rvm install 3.1.2
+```
 
-Things you may want to cover:
+### 2. Start database
 
-* Ruby version
+```bash
+docker-compose up mysql8
+```
+### 3. Start server
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```bash
+rails s
+```

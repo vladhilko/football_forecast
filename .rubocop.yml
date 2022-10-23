@@ -65,3 +65,9 @@ Rails/Inquiry:
   Enabled: false
 Gemspec/RequiredRubyVersion:
   Enabled: false
+Rails/FilePath:
+  EnforcedStyle: arguments
+
+# Styles from new Rubocop Versions
+Rails/NegateInclude: # new in 2.7
+  Enabled: true
