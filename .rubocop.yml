@@ -1,0 +1,67 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
+AllCops:
+  TargetRubyVersion: 3.0
+  Exclude:
+  - "**/scripts/**/**/**/*"
+  - "vendor/**/*"
+  - "**/tmp/**/*"
+  - "**/db/data/**/*"
+  - "**/db/data_schema.rb"
+  - "**/db/schema.rb"
+  - "**/bin/**/*"
+  - "**/node_modules/**/*"
+
+Layout/LineLength:
+  Enabled: true
+  Max: 120
+  Exclude:
+    - "config/**/*"
+Metrics/BlockLength:
+  Exclude:
+    - "config/**/*"
+Style/Encoding:
+  Enabled: false
+Style/LambdaCall:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/KeywordParametersOrder:
+  Enabled: false
+Style/MissingRespondToMissing:
+  Enabled: false
+Rails/DynamicFindBy:
+  Enabled: false
+Rails/FilePath:
+  EnforcedStyle: arguments
+Rails/SkipsModelValidations:
+  Enabled: false
+Rails/HasAndBelongsToMany:
+  Enabled: false
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+Rails/InverseOf:
+  Enabled: false
+Rails/LexicallyScopedActionFilter:
+  Enabled: false
+Rails/RakeEnvironment:
+  Enabled: false
+Rails/ReversibleMigration:
+  Enabled: false
+Rails/NotNullColumn:
+  Enabled: false
+Lint/MissingSuper:
+  Enabled: false
+Rails/FindById:
+  Enabled: false
+Layout/SpaceBeforeBrackets:
+  Enabled: false
+Lint/EmptyBlock:
+  Enabled: false
+Lint/ToEnumArguments:
+  Enabled: false
+Rails/Inquiry:
+  Enabled: false
+Gemspec/RequiredRubyVersion:
+  Enabled: false
