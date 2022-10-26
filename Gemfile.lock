@@ -1,3 +1,8 @@
+PATH
+  remote: gems/oddsportal_scraper
+  specs:
+    oddsportal_scraper (0.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -246,6 +251,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   mysql2 (~> 0.5.4)
+  oddsportal_scraper!
   pry-rails
   puma (~> 5.0)
   rails (~> 7.0.4)
