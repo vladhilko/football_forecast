@@ -3,11 +3,15 @@
 require 'spec_helper'
 
 RSpec.describe OddsportalScraper::Facade do
-  describe '.get_something' do
-    subject { described_class.get_something }
+  describe '.sport_names' do
+    subject { described_class.sport_names }
 
-    it 'returns something' do
-      expect(subject).to be 1
+    before { allow(OddsportalScraper::Scrapers::SportNames).to receive(:call) }
+
+    it 'calls correct scraper method' do
+      subject
+
+      expect(OddsportalScraper::Scrapers::SportNames).to have_received(:call)
     end
   end
 end

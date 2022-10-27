@@ -67,6 +67,19 @@ Gemspec/RequiredRubyVersion:
   Enabled: false
 Rails/FilePath:
   EnforcedStyle: arguments
+Layout/EmptyLinesAroundClassBody:
+  Description: Keeps track of empty lines around class bodies.
+  Enabled: true
+  EnforcedStyle: empty_lines
+  SupportedStyles:
+  - empty_lines
+  - no_empty_lines
+
+# RSpec
+RSpec/ExampleLength:
+  Enabled: false
+RSpec/NamedSubject:
+  Enabled: false
 
 # Styles from new Rubocop Versions
 Rails/NegateInclude: # new in 2.7

@@ -2,12 +2,14 @@
 
 module OddsportalScraper
   class Facade
-    URL = 'https://www.oddsportal.com/soccer/england/premier-league-2021-2022/results/'
 
     class << self
-      def get_something
-        1
+
+      def sport_names
+        Scrapers::SportNames.call
       end
+
     end
+
   end
 end

@@ -22,6 +22,7 @@ Bundler.require(*Rails.groups)
 
 module FootballForecast
   class Application < Rails::Application
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
@@ -35,5 +36,6 @@ module FootballForecast
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
   end
 end
