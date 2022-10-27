@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'wombat'
+require 'pry'
 
 module OddsportalScraper
   module Scrapers
