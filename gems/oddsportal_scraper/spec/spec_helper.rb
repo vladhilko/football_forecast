@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require 'oddsportal_scraper'
+require 'support/webmock'
+require 'support/vcr'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

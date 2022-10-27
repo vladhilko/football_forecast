@@ -1,5 +1,5 @@
 PATH
-  remote: .
+  remote: gems/oddsportal_scraper
   specs:
     oddsportal_scraper (0.1.0)
 

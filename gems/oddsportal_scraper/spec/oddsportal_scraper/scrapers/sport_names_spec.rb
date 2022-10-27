@@ -3,10 +3,10 @@
 require 'spec_helper'
 
 RSpec.describe OddsportalScraper::Scrapers::SportNames do
-  describe '#call' do
+  describe '.call' do
     subject { described_class.call }
 
-    it 'returns all sport names available on the oddsportal' do
+    it 'returns all sport names available on the oddsportal', vcr: 'oddsportal/sport_names' do
       expect(subject).to contain_exactly(
         'Soccer',
         'Basketball',
