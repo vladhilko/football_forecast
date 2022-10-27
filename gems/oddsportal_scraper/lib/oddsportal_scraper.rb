@@ -2,6 +2,7 @@
 
 require_relative 'oddsportal_scraper/version'
 require_relative 'oddsportal_scraper/facade'
+require_relative 'oddsportal_scraper/scrapers/base'
 require_relative 'oddsportal_scraper/scrapers/sport_names'
 
 module OddsportalScraper

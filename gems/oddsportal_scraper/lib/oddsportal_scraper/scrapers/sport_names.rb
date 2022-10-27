@@ -1,14 +1,8 @@
 # frozen_string_literal: true
 
-require 'wombat'
-
 module OddsportalScraper
   module Scrapers
-    class SportNames
-
-      def self.call
-        new.call
-      end
+    class SportNames < Base
 
       def call
         parse.fetch('sport_names')
@@ -18,7 +12,7 @@ module OddsportalScraper
 
       def parse
         Wombat.crawl do
-          base_url 'https://oddsportal.com'
+          base_url BASE_URL
           path '/'
 
           sport_names({ css: '.sport_name a' }, :list)
