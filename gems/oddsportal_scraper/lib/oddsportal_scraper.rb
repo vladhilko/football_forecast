@@ -6,6 +6,7 @@ require_relative 'oddsportal_scraper/scrapers/base'
 require_relative 'oddsportal_scraper/scrapers/sport_names'
 require_relative 'oddsportal_scraper/scrapers/countries'
 require_relative 'oddsportal_scraper/scrapers/leagues'
+require_relative 'oddsportal_scraper/scrapers/seasons'
 
 module OddsportalScraper
   class Error < StandardError; end
