@@ -18,5 +18,31 @@ RSpec.describe OddsportalScraper::Scrapers::Matches do
         expect(subject).to match_array(expected_response)
       end
     end
+
+    context 'when choosen sport: `soccer`, country: `England`, league: `Premier League` and season: `2019-2020`' do
+      let(:sport_name) { 'soccer' }
+      let(:country) { 'England' }
+      let(:league) { 'Premier League' }
+      let(:season) { '2019-2020' }
+
+      let(:expected_response) { parse_json_fixture('results/soccer/england/premier-league/2019-2020/matches.json') }
+
+      it 'returns all mathes available for this sport, country, league and season' do
+        expect(subject).to match_array(expected_response)
+      end
+    end
+
+    context 'when choosen sport: `soccer`, country: `England`, league: `Championship` and season: `2019-2020`' do
+      let(:sport_name) { 'soccer' }
+      let(:country) { 'England' }
+      let(:league) { 'Championship' }
+      let(:season) { '2019-2020' }
+
+      let(:expected_response) { parse_json_fixture('results/soccer/england/championship/2019-2020/matches.json') }
+
+      it 'returns all mathes available for this sport, country, league and season' do
+        expect(subject).to match_array(expected_response)
+      end
+    end
   end
 end

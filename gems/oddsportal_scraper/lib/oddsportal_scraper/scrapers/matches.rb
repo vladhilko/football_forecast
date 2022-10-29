@@ -18,17 +18,25 @@ module OddsportalScraper
 
         @path = "#{@sport}/#{@country}/#{@league}-#{@season}/results/"
         url = "https://www.oddsportal.com/#{@path}"
+
         parse!(:parse, url:)
       end
 
-      def parse(response, **)
-        parse_page_with_matches(response)
+      def parse(response, url:, **)
+        last_page_num = response.css('div#pagination a').last.attributes.fetch('href').value.split('/').last.to_i
+        all_season_matches = []
+
+        (1..last_page_num).each do |page_number|
+          browser.visit("#{url}#/page/#{page_number}/")
+          all_season_matches.concat(parse_page_with_matches)
+        end
+        all_season_matches
       end
 
       private
 
-      def parse_page_with_matches(response) # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
-        tournament_table = response.css('div#tournamentTable')
+      def parse_page_with_matches # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+        tournament_table = browser.current_response.css('div#tournamentTable')
 
         matches = []
         match_date = nil
@@ -41,18 +49,12 @@ module OddsportalScraper
             score = match_day.css('td.table-score').text
             home_win, draw, away_win = match_day.css('td.odds-nowrp a').children.map(&:to_s)
 
-            odds = {
-              home_win:,
-              draw:,
-              away_win:
-            }
-
             matches << {
               match_date:,
               match_time:,
               participants:,
               score:,
-              odds:
+              odds: { home_win:, draw:, away_win: }
             }
           end
         end
