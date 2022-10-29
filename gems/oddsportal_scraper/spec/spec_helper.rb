@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'oddsportal_scraper'
+require 'support/fixtures'
 require 'support/webmock'
 require 'support/vcr'
 

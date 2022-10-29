@@ -13,4 +13,5 @@ gem 'webmock', '~> 3.18.1'
 
 gem 'pry'
 
+gem 'kimurai', github: 'baka-san/kimuraframework', branch: 'master'
 gem 'wombat', '~> 3.0.0'
