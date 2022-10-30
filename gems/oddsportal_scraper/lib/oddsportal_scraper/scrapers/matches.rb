@@ -14,7 +14,7 @@ module OddsportalScraper
         @sport = sport
         @country = country.downcase
         @league = league.downcase.split(' ').join('-')
-        @season = season
+        @season = season.split('/').join('-')
 
         @path = "#{@sport}/#{@country}/#{@league}-#{@season}/results/"
         url = "https://www.oddsportal.com/#{@path}"

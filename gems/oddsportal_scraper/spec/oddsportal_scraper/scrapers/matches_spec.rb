@@ -32,11 +32,11 @@ RSpec.describe OddsportalScraper::Scrapers::Matches do
       end
     end
 
-    context 'when choosen sport: `soccer`, country: `England`, league: `Championship` and season: `2019-2020`' do
+    context 'when choosen sport: `soccer`, country: `England`, league: `Championship` and season: `2019/2020`' do
       let(:sport_name) { 'soccer' }
       let(:country) { 'England' }
       let(:league) { 'Championship' }
-      let(:season) { '2019-2020' }
+      let(:season) { '2019/2020' }
 
       let(:expected_response) { parse_json_fixture('results/soccer/england/championship/2019-2020/matches.json') }
 
