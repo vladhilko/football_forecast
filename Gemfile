@@ -53,6 +53,7 @@ gem 'dotenv-rails'
 # gem "image_processing", "~> 1.2"
 
 # local gems
+gem 'kimurai', github: 'baka-san/kimuraframework', branch: 'master'
 gem 'oddsportal_scraper', path: 'gems/oddsportal_scraper'
 
 group :development, :test do
