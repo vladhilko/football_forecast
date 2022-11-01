@@ -27,3 +27,15 @@ docker-compose up mysql8
 ```bash
 rails s
 ```
+
+### OddsportalScraper
+
+[OddsportalScraper README](gems/oddsportal_scraper/README.md)
+
+### Rake Tasks
+
+The following rake task fetch all countries with available football leagues and save them to the database.
+
+```console
+foo@bar:~$ rake countries:fetch
+```

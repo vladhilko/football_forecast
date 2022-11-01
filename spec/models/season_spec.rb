@@ -8,7 +8,7 @@ RSpec.describe Season, type: :model do
   end
 
   describe 'validations' do
-    subject { described_class.new(name: '2020/2021', league: league) }
+    subject { described_class.new(name: '2020/2021', league:) }
 
     let(:league) { create(:league) }
 

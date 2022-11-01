@@ -80,6 +80,16 @@ RSpec/ExampleLength:
   Enabled: false
 RSpec/NamedSubject:
   Enabled: false
+RSpec/ExpectInHook:
+  Enabled: false
+RSpec/StubbedMock:
+  Enabled: false
+RSpec/MessageSpies:
+  Enabled: false
+Layout/MultilineMethodCallIndentation:
+  Include:
+    - "spec/**/*_spec.rb"
+  EnforcedStyle: indented
 
 # Styles from new Rubocop Versions
 Rails/NegateInclude: # new in 2.7

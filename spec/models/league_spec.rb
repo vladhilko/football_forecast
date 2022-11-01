@@ -9,7 +9,7 @@ RSpec.describe League, type: :model do
   end
 
   describe 'validations' do
-    subject { described_class.new(name: 'Premier League', country: country) }
+    subject { described_class.new(name: 'Premier League', country:) }
 
     let(:country) { create(:country) }
 
