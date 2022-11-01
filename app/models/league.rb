@@ -6,4 +6,6 @@ class League < ApplicationRecord
 
   has_many :seasons
 
+  validates :name, uniqueness: { scope: :country_id, case_sensitive: false }
+
 end
