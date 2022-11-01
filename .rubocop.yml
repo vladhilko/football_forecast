@@ -74,6 +74,15 @@ Layout/EmptyLinesAroundClassBody:
   SupportedStyles:
   - empty_lines
   - no_empty_lines
+Lint:
+  Exclude:
+  - "**/db/migrate/**/*.rb"
+Layout:
+  Exclude:
+  - "**/db/migrate/**/*.rb"
+Style:
+  Exclude:
+  - "**/db/migrate/**/*.rb"
 
 # RSpec
 RSpec/ExampleLength:
