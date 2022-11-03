@@ -51,3 +51,15 @@ The following rake task fetch all available fotball seasons and save them to the
 ```console
 foo@bar:~$ rake seasons:fetch_all
 ```
+
+### Development
+
+To create AdminUser:
+
+```console
+foo@bar:~$ rails db:seed
+```
+
+To visit CRM page:
+
+`http://localhost:3000/admin`
