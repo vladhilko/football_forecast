@@ -20,7 +20,9 @@ Layout/LineLength:
     - "config/**/*"
 Metrics/BlockLength:
   Exclude:
+    - "app/admin/**/*"
     - "config/**/*"
+    - "spec/**/*"
 Style/Encoding:
   Enabled: false
 Style/LambdaCall:
