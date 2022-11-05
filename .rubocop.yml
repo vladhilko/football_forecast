@@ -85,6 +85,8 @@ Layout:
 Style:
   Exclude:
   - "**/db/migrate/**/*.rb"
+Naming/VariableNumber:
+  EnforcedStyle: snake_case
 
 # RSpec
 Layout/MultilineMethodCallIndentation:
