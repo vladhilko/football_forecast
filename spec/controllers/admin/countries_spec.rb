@@ -7,13 +7,13 @@ describe Admin::CountriesController, type: :controller do
 
   before { sign_in create(:admin_user) }
 
-  describe 'GET #index' do
-    let(:country1) { create(:country, name: 'Spain') }
-    let(:country2) { create(:country, name: 'England') }
+  let(:spain) { create(:country, name: 'Spain') }
+  let(:england) { create(:country, name: 'England') }
 
+  describe 'GET #index' do
     before do
-      country1
-      country2
+      spain
+      england
     end
 
     it 'renders countries' do
@@ -21,26 +21,26 @@ describe Admin::CountriesController, type: :controller do
 
       expect(response).to have_http_status(:ok)
       expect(response.body).to include(
-        country1.id.to_s,
-        country1.name,
-        country2.id.to_s,
-        country2.name
+        spain.id.to_s,
+        spain.name,
+        england.id.to_s,
+        england.name
       )
     end
   end
 
   describe 'GET #show' do
-    let(:country) { create(:country, name: 'Spain') }
+    before { england }
 
     it 'renders country' do
-      get(:show, params: { id: country.id })
+      get(:show, params: { id: england.id })
 
       expect(response).to have_http_status(:ok)
       expect(response.body).to include(
-        country.id.to_s,
-        country.name,
-        country.created_at.strftime('%B %d, %Y %H:%M'),
-        country.updated_at.strftime('%B %d, %Y %H:%M')
+        england.id.to_s,
+        england.name,
+        england.created_at.strftime('%B %d, %Y %H:%M'),
+        england.updated_at.strftime('%B %d, %Y %H:%M')
       )
     end
   end
