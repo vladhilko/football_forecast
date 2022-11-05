@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_03_175404) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_05_145152) do
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -52,6 +52,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_03_175404) do
     t.index ["country_id", "name"], name: "index_leagues_on_country_id_and_name", unique: true
   end
 
+  create_table "matches", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "season_id", null: false
+    t.date "date", null: false
+    t.time "time"
+    t.string "home_team", null: false
+    t.string "away_team", null: false
+    t.string "score", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["season_id", "home_team", "away_team", "date"], name: "index_matches_on_season_id_and_home_team_and_away_team_and_date", unique: true
+  end
+
   create_table "seasons", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "league_id", null: false
@@ -61,5 +73,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_03_175404) do
   end
 
   add_foreign_key "leagues", "countries"
+  add_foreign_key "matches", "seasons"
   add_foreign_key "seasons", "leagues"
 end
