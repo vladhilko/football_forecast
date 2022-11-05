@@ -17,6 +17,12 @@ mysql 8.0.31
 rvm install 3.1.2
 ```
 
+### 1.1 Yarn install
+
+```bash
+yarn install
+```
+
 ### 2. Start database
 
 ```bash

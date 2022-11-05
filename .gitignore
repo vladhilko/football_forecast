@@ -32,3 +32,6 @@
 
 # ENV files
 .env.development
+
+# Client
+/node_modules
