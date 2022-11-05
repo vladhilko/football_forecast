@@ -103,6 +103,10 @@ RSpec/MessageSpies:
   Enabled: false
 RSpec/MultipleMemoizedHelpers:
   Enabled: false
+RSpec/MultipleExpectations:
+  Max: 12
+RSpec/FilePath:
+  SpecSuffixOnly: true
 
 # Styles from new Rubocop Versions
 Rails/NegateInclude: # new in 2.7
