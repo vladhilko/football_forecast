@@ -17,6 +17,12 @@ mysql 8.0.31
 rvm install 3.1.2
 ```
 
+### 1.1 Yarn install
+
+```bash
+yarn install
+```
+
 ### 2. Start database
 
 ```bash
@@ -51,3 +57,15 @@ The following rake task fetch all available fotball seasons and save them to the
 ```console
 foo@bar:~$ rake seasons:fetch_all
 ```
+
+### Development
+
+To create AdminUser:
+
+```console
+foo@bar:~$ rails db:seed
+```
+
+To visit CRM page:
+
+`http://localhost:3000/admin`

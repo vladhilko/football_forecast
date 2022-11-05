@@ -20,7 +20,9 @@ Layout/LineLength:
     - "config/**/*"
 Metrics/BlockLength:
   Exclude:
+    - "app/admin/**/*"
     - "config/**/*"
+    - "spec/**/*"
 Style/Encoding:
   Enabled: false
 Style/LambdaCall:
@@ -83,6 +85,8 @@ Layout:
 Style:
   Exclude:
   - "**/db/migrate/**/*.rb"
+Naming/VariableNumber:
+  EnforcedStyle: snake_case
 
 # RSpec
 Layout/MultilineMethodCallIndentation:
@@ -101,6 +105,10 @@ RSpec/MessageSpies:
   Enabled: false
 RSpec/MultipleMemoizedHelpers:
   Enabled: false
+RSpec/MultipleExpectations:
+  Max: 12
+RSpec/FilePath:
+  SpecSuffixOnly: true
 
 # Styles from new Rubocop Versions
 Rails/NegateInclude: # new in 2.7
