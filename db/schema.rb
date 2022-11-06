@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_05_145152) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_06_185808) do
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -35,6 +35,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_05_145152) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "betting_odds", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "match_id", null: false
+    t.decimal "home_team_win", precision: 10, scale: 2, null: false
+    t.decimal "away_team_win", precision: 10, scale: 2, null: false
+    t.decimal "draw", precision: 10, scale: 2, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["match_id"], name: "index_betting_odds_on_match_id"
   end
 
   create_table "countries", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -72,6 +82,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_05_145152) do
     t.index ["league_id", "name"], name: "index_seasons_on_league_id_and_name", unique: true
   end
 
+  add_foreign_key "betting_odds", "matches"
   add_foreign_key "leagues", "countries"
   add_foreign_key "matches", "seasons"
   add_foreign_key "seasons", "leagues"
