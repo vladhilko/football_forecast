@@ -3,17 +3,20 @@
 module CreateMatch
   class Action
 
-    def initialize(season:, form:)
-      @params = form.attributes
-
+    def initialize(season:, inputs:)
+      @inputs = inputs
       @season = season
     end
 
     def call
-      Match.create(season:, **params)
+      Command.save match
     end
 
-    attr_reader :params, :season
+    attr_reader :inputs, :season
+
+    def match
+      Match.new(inputs.attributes.merge(season_id: season.id))
+    end
 
   end
 end
