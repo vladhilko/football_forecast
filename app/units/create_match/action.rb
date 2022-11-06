@@ -12,6 +12,8 @@ module CreateMatch
       Command.save match
     end
 
+    private
+
     attr_reader :inputs, :season
 
     def match

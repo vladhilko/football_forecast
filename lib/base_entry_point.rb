@@ -18,7 +18,12 @@ class BaseEntryPoint
   def validate_inputs!
     return if inputs.blank?
 
-    inputs.call
+    result = inputs.call
+    raise_invalid_inputs_params_error(result) if result.failure?
+  end
+
+  def raise_invalid_inputs_params_error(result)
+    raise Errors::InvalidInputsParams, result.errors.to_h
   end
 
 end

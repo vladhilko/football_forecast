@@ -8,7 +8,7 @@ module CreateMatch
       required(:away_team).filled(:string)
       required(:score).filled(:string)
       required(:date).filled(:date)
-      optional(:time).filled(:string)
+      optional(:time).maybe(:string)
     end
 
   end

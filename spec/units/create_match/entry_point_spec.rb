@@ -23,14 +23,34 @@ describe CreateMatch::EntryPoint do
     it 'creates a new match record', :aggregate_failures do
       expect { subject }.to change(Match, :count).by(1)
 
-      match = Match.last
-      expect(match).to have_attributes(
+      expect(subject).to have_attributes(
         home_team: 'Arsenal',
         away_team: 'Chelsea',
         score: '2:1',
         date: '01.12.2010'.to_date
       )
-      expect(match.time.strftime('%H:%M')).to eq('17:00')
+      expect(subject.time.strftime('%H:%M')).to eq('17:00')
+    end
+  end
+
+  context 'when params are invalid' do
+    let(:params) do
+      {
+        home_team: '',
+        away_team: '',
+        score: '',
+        date: '',
+        time: ''
+      }
+    end
+
+    it 'raises a validation error', :aggregate_failures do
+      expect { subject }.to raise_error(Errors::InvalidInputsParams) do |error|
+        expect(error.errors[:home_team]).to contain_exactly('must be filled')
+        expect(error.errors[:away_team]).to contain_exactly('must be filled')
+        expect(error.errors[:score]).to contain_exactly('must be filled')
+        expect(error.errors[:date]).to contain_exactly('must be filled')
+      end
     end
   end
 end
