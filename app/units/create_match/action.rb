@@ -3,8 +3,9 @@
 module CreateMatch
   class Action
 
-    def initialize(season:, params:)
-      @params = params
+    def initialize(season:, form:)
+      @params = form.attributes
+
       @season = season
     end
 

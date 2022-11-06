@@ -4,7 +4,8 @@ module CreateMatch
   class EntryPoint
 
     def initialize(season:, params:)
-      @action = CreateMatch::Action.new(season:, params:)
+      form = CreateMatch::Form.new(params)
+      @action = CreateMatch::Action.new(season:, form:)
     end
 
     delegate :call, to: :action
