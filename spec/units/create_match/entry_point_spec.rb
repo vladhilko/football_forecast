@@ -16,18 +16,29 @@ describe CreateMatch::EntryPoint do
         away_team: 'Chelsea',
         score: '2:1',
         date: '01.12.2010',
-        time: '17:00'
+        time: '17:00',
+        betting_odds: {
+          home_team_win: '2.34',
+          away_team_win: '2.65',
+          draw: '3.21'
+        }
       }
     end
 
     it 'creates a new match record', :aggregate_failures do
       expect { subject }.to change(Match, :count).by(1)
+        .and change(BettingOdds, :count).by(1)
 
       expect(subject).to have_attributes(
         home_team: 'Arsenal',
         away_team: 'Chelsea',
         score: '2:1',
         date: '01.12.2010'.to_date
+      )
+      expect(subject.betting_odds).to have_attributes(
+        home_team_win: 2.34,
+        away_team_win: 2.65,
+        draw: 3.21
       )
       expect(subject.time.strftime('%H:%M')).to eq('17:00')
     end

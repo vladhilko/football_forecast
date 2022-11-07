@@ -9,6 +9,11 @@ module CreateMatch
       required(:score).filled(:string)
       required(:date).filled(:date)
       optional(:time).maybe(:string)
+      required(:betting_odds).schema do
+        required(:home_team_win).filled(:decimal)
+        required(:away_team_win).filled(:decimal)
+        required(:draw).filled(:decimal)
+      end
     end
 
   end

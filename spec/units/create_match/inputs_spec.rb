@@ -14,7 +14,12 @@ describe CreateMatch::Inputs do
         away_team: 'Chelsea',
         score: '2:1',
         date: '01.12.2010',
-        time: '17:00'
+        time: '17:00',
+        betting_odds: {
+          home_team_win: '2.34',
+          away_team_win: '2.65',
+          draw: '3.21'
+        }
       }
     end
 
@@ -25,7 +30,12 @@ describe CreateMatch::Inputs do
           away_team: 'Chelsea',
           score: '2:1',
           date: '01.12.2010'.to_date,
-          time: '17:00'
+          time: '17:00',
+          betting_odds: {
+            home_team_win: 2.34,
+            away_team_win: 2.65,
+            draw: 3.21
+          }
         }
       )
     end
@@ -39,7 +49,12 @@ describe CreateMatch::Inputs do
             home_team: 'Arsenal',
             away_team: 'Chelsea',
             score: '2:1',
-            date: '01.12.2010'.to_date
+            date: '01.12.2010'.to_date,
+            betting_odds: {
+              home_team_win: 2.34,
+              away_team_win: 2.65,
+              draw: 3.21
+            }
           }
         )
       end

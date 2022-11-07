@@ -9,7 +9,9 @@ module CreateMatch
     end
 
     def call
-      Command.save match
+      Command.save(match).tap do |created_match|
+        Subactions::CreateBettingOdds.new(match: created_match, params: betting_odds_attributes).call
+      end
     end
 
     private
@@ -17,7 +19,15 @@ module CreateMatch
     attr_reader :inputs, :season
 
     def match
-      Match.new(inputs.attributes.merge(season_id: season.id))
+      Match.new(match_attributes)
+    end
+
+    def match_attributes
+      inputs.attributes.except(:betting_odds).merge(season_id: season.id)
+    end
+
+    def betting_odds_attributes
+      inputs.attributes.fetch(:betting_odds)
     end
 
   end
