@@ -87,6 +87,12 @@ Style:
   - "**/db/migrate/**/*.rb"
 Naming/VariableNumber:
   EnforcedStyle: snake_case
+Metrics/MethodLength:
+  Exclude:
+    - "lib/tasks/**/*.rake"
+Metrics/AbcSize:
+  Exclude:
+    - "lib/tasks/**/*.rake"
 
 # RSpec
 Layout/MultilineMethodCallIndentation:
