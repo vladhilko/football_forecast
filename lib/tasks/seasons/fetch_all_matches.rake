@@ -14,6 +14,8 @@ module Tasks
             @league = League.find_by(name: args.fetch(:league), country:)
             @season = Season.find_by(name: args.fetch(:season), league:)
 
+            raise Errors::SeasonNotFound, 'Please check provided params' if season.blank?
+
             initial_season_matches_count = season.matches.count
 
             puts "Start creating matches for #{country.name} #{league.name} #{season.name}:"
