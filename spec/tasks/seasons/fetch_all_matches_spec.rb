@@ -61,7 +61,23 @@ RSpec.describe 'rake seasons:fetch_all_matches', type: :task do
     end
 
     it 'saves all fetched matches to the db' do
-      expect { subject }.to change(Match, :count).by(2).and output(expected_output).to_stdout
+      expect { subject }.to change(Match, :count).by(2)
+        .and change(BettingOdds, :count).by(2)
+        .and output(expected_output).to_stdout
+
+      match_1 = Match.first
+      expect(match_1).to have_attributes(
+        home_team: 'Brentford',
+        away_team: 'Fulham',
+        score: '1:2 ET',
+        date: '04 Aug 2021'.to_date,
+        season: season_2021_2022
+      )
+      expect(match_1.betting_odds).to have_attributes(
+        home_team_win: 2.13,
+        draw: 3.16,
+        away_team_win: 3.82
+      )
     end
   end
 
