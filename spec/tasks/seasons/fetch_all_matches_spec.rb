@@ -54,8 +54,6 @@ RSpec.describe 'rake seasons:fetch_all_matches', type: :task do
     let(:expected_output) do
       <<~TEXT
         Start creating matches for England Premier League 2021/2022:
-        Brentford - Fulham match has been added
-        Fulham - Cardiff match has been added
         2 matches have been added to the DB
       TEXT
     end

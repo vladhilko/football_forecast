@@ -19,7 +19,7 @@ module Tasks
             initial_season_matches_count = season.matches.count
 
             puts "Start creating matches for #{country.name} #{league.name} #{season.name}:"
-            create_all_season_matches
+            populate_matches
 
             season_matches_count_after_running_task = season.matches.count - initial_season_matches_count
 
@@ -32,29 +32,8 @@ module Tasks
 
       attr_reader :country, :league, :season
 
-      def create_all_season_matches
-        matches = OddsportalScraper.matches(sport: 'soccer', country: country.name, league: league.name,
-                                            season: season.name)
-        matches.each do |match_params|
-          match = CreateMatch::EntryPoint.call(season:, params: odds_portal_match_params_mapping(match_params))
-          puts "#{match.home_team} - #{match.away_team} match has been added"
-        end
-      end
-
-      def odds_portal_match_params_mapping(match_params)
-        home_team, away_team = match_params.fetch(:participants).split(' - ')
-        {
-          home_team:,
-          away_team:,
-          score: match_params.fetch(:score),
-          date: match_params.fetch(:match_date),
-          time: match_params.fetch(:match_time),
-          betting_odds: {
-            home_team_win: match_params.dig(:odds, :home_win),
-            away_team_win: match_params.dig(:odds, :away_win),
-            draw: match_params.dig(:odds, :draw)
-          }
-        }
+      def populate_matches
+        ::Seasons::PopulateMatches::EntryPoint.call(season:)
       end
 
     end
