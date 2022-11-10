@@ -17,4 +17,10 @@ RSpec.describe Match, type: :model do
 
     it { is_expected.to validate_uniqueness_of(:home_team).case_insensitive.scoped_to(%i[season_id away_team date]) }
   end
+
+  describe '#name' do
+    subject { described_class.new(home_team: 'Arsenal', away_team: 'Chelsea').name }
+
+    it { is_expected.to eq('Arsenal - Chelsea') }
+  end
 end

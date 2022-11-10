@@ -11,7 +11,6 @@ ActiveAdmin.register Match do
   filter :season_league_id, as: :select, label: 'League', collection: -> { League.all.order(:name) }
 
   filter :id
-  filter :name
 
   index do
     id_column

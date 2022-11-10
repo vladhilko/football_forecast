@@ -8,4 +8,8 @@ class Match < ApplicationRecord
 
   validates :home_team, uniqueness: { scope: %i[season_id away_team date], case_sensitive: false }
 
+  def name
+    "#{home_team} - #{away_team}"
+  end
+
 end
