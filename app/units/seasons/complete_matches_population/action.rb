@@ -6,7 +6,6 @@ module Seasons
 
       def initialize(season:)
         @season = season
-        @season_matches = season.matches
       end
 
       def call
@@ -16,7 +15,11 @@ module Seasons
 
       private
 
-      attr_reader :season, :season_matches
+      attr_reader :season
+
+      def season_matches
+        @season_matches ||= Queries::Match.by_season(season)
+      end
 
       def completeness_status
         case season_matches.size
