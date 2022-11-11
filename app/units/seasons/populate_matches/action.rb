@@ -14,8 +14,8 @@ module Seasons
         fetched_matches.lazy.each do |match_params|
           CreateMatch::EntryPoint.call(season:, params: oddsportal_match_params_mapping(match_params))
         end
-        season.completeness_status = 'full'
-        Command.save season
+
+        Seasons::CompleteMatchesPopulation::EntryPoint.call(season:)
       end
 
       private

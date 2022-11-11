@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe Seasons::PopulateMatches::EntryPoint do
-  subject { described_class.new(season:).call }
+  subject { described_class.call(season:) }
 
   let(:england) { create(:country, name: 'England') }
   let(:premier_league) { create(:league, country: england, name: 'Premier League') }
@@ -24,7 +24,7 @@ describe Seasons::PopulateMatches::EntryPoint do
       {
         "match_date": '30 Jul 2021',
         "match_time": '19:45',
-        "participants": 'Fulham - Cardiff',
+        "participants": 'Fulham - Brentford',
         "score": '1:2',
         "odds": {
           "home_win": '2.04',
@@ -63,7 +63,7 @@ describe Seasons::PopulateMatches::EntryPoint do
     match_2 = Match.second
     expect(match_2).to have_attributes(
       home_team: 'Fulham',
-      away_team: 'Cardiff',
+      away_team: 'Brentford',
       score: '1:2',
       date: '30 Jul 2021'.to_date,
       season:

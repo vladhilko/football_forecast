@@ -7,6 +7,7 @@ class Season < ApplicationRecord
     full
     partial
     ongoing
+    empty
   ].freeze
 
   belongs_to :league

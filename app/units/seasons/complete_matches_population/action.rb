@@ -1,0 +1,39 @@
+# frozen_string_literal: true
+
+module Seasons
+  module CompleteMatchesPopulation
+    class Action
+
+      def initialize(season:)
+        @season = season
+        @season_matches = season.matches
+      end
+
+      def call
+        season.completeness_status = completeness_status
+        Command.save season
+      end
+
+      private
+
+      attr_reader :season, :season_matches
+
+      def completeness_status
+        case season_matches.size
+        when 0 then 'empty'
+        when (required_season_games_count...) then 'full'
+        when (1...required_season_games_count) then 'partial'
+        end
+      end
+
+      def league_teams_count
+        @league_teams_count ||= season_matches.pluck(:home_team, :away_team).flatten.uniq.count
+      end
+
+      def required_season_games_count
+        (league_teams_count - 1) * league_teams_count
+      end
+
+    end
+  end
+end
