@@ -19,7 +19,8 @@ module Tasks
             initial_season_matches_count = season.matches.count
 
             puts "Start creating matches for #{country.name} #{league.name} #{season.name}:"
-            populate_matches
+
+            ActiveRecord::Base.transaction { populate_matches }
 
             season_matches_count_after_running_task = season.matches.count - initial_season_matches_count
 
