@@ -44,6 +44,7 @@ describe Seasons::PopulateMatches::EntryPoint do
   it 'populates database with all matches for the given season' do
     expect { subject }.to change(Match, :count).by(2)
       .and change(BettingOdds, :count).by(2)
+      .and change { season.reload.completeness_status }.from('initial').to('full')
 
     match_1 = Match.first
     expect(match_1).to have_attributes(
