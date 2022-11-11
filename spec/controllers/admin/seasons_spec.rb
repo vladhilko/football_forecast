@@ -29,10 +29,12 @@ describe Admin::SeasonsController, type: :controller do
       expect(response.body).to include(
         season_2008_2009.id.to_s,
         season_2008_2009.name,
+        season_2008_2009.completeness_status,
         premier_league.name,
         england.name,
         season_2009_2010.id.to_s,
         season_2009_2010.name,
+        season_2009_2010.completeness_status,
         laliga.name,
         spain.name
       )
@@ -49,6 +51,7 @@ describe Admin::SeasonsController, type: :controller do
       expect(response.body).to include(
         season_2008_2009.id.to_s,
         season_2008_2009.name,
+        season_2008_2009.completeness_status,
         premier_league.name,
         england.name,
         season_2008_2009.created_at.strftime('%B %d, %Y %H:%M'),

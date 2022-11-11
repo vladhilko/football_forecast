@@ -16,6 +16,9 @@ ActiveAdmin.register Season do
   index do
     id_column
     column :name
+    column :completeness_status do |season|
+      status_tag season.completeness_status
+    end
     column :league
     column :country do |season|
       season.league.country
@@ -26,6 +29,9 @@ ActiveAdmin.register Season do
     attributes_table do
       row :id
       row :name
+      row :completeness_status do |season|
+        status_tag season.completeness_status
+      end
       row :league
       row :country do |season|
         season.league.country
