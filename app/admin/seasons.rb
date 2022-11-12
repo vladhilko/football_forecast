@@ -12,7 +12,7 @@ ActiveAdmin.register Season do
 
   filter :id
   filter :name
-  filter :completeness_status, as: :select, collection: -> { Season::COMPLETENESS_STATUSES }
+  filter :completeness_status, as: :select, collection: -> { Constants.season.completeness_statuses.values }
 
   index do
     id_column

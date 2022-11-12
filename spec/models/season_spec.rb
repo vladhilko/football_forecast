@@ -14,6 +14,10 @@ RSpec.describe Season, type: :model do
     let(:league) { create(:league) }
 
     it { is_expected.to validate_uniqueness_of(:name).case_insensitive.scoped_to(:league_id) }
-    it { is_expected.to validate_inclusion_of(:completeness_status).in_array(Season::COMPLETENESS_STATUSES) }
+
+    it do
+      expect(subject).to validate_inclusion_of(:completeness_status)
+        .in_array(Constants.season.completeness_statuses.values)
+    end
   end
 end
