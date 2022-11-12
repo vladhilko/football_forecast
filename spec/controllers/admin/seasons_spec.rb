@@ -5,7 +5,10 @@ require 'rails_helper'
 describe Admin::SeasonsController, type: :controller do
   render_views
 
-  before { sign_in create(:admin_user) }
+  before do
+    freeze_time
+    sign_in create(:admin_user)
+  end
 
   let(:spain) { create(:country, name: 'Spain') }
   let(:england) { create(:country, name: 'England') }
@@ -13,8 +16,8 @@ describe Admin::SeasonsController, type: :controller do
   let(:premier_league) { create(:league, country: england, name: 'Premier League') }
   let(:laliga) { create(:league, country: spain, name: 'LaLiga') }
 
-  let(:season_2008_2009) { create(:season, league: premier_league, name: '2008/2009') }
-  let(:season_2009_2010) { create(:season, league: laliga, name: '2009/2010') }
+  let(:season_2008_2009) { create(:season, league: premier_league, name: '2008/2009', populated_at: Time.current) }
+  let(:season_2009_2010) { create(:season, league: laliga, name: '2009/2010', populated_at: Time.current) }
 
   describe 'GET #index' do
     before do
@@ -52,6 +55,7 @@ describe Admin::SeasonsController, type: :controller do
         season_2008_2009.id.to_s,
         season_2008_2009.name,
         season_2008_2009.completeness_status,
+        season_2008_2009.populated_at.strftime('%B %d, %Y %H:%M'),
         premier_league.name,
         england.name,
         season_2008_2009.created_at.strftime('%B %d, %Y %H:%M'),

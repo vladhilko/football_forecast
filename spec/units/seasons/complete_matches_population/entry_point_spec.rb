@@ -7,14 +7,17 @@ describe Seasons::CompleteMatchesPopulation::EntryPoint do
 
   let(:season) { create(:season, name: '2021/2022') }
 
+  before { freeze_time }
+
   context 'when season populated all matches' do
     before do
       create(:match, season:, home_team: 'Arsenal', away_team: 'Liverpool')
       create(:match, season:, home_team: 'Liverpool', away_team: 'Arsenal')
     end
 
-    it 'sets `completeness_status` to `full`' do
+    it 'sets `completeness_status` to `full` and `populated_at` to the current time' do
       expect { subject }.to change { season.reload.completeness_status }.from('initial').to('full')
+        .and change { season.reload.populated_at }.from(nil).to(Time.current)
     end
   end
 

@@ -10,6 +10,8 @@ module Seasons
 
       def call
         season.completeness_status = completeness_status
+        season.populated_at = Time.current
+
         Command.save season
       end
 

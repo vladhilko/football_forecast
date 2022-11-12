@@ -12,6 +12,7 @@ ActiveAdmin.register Season do
 
   filter :id
   filter :name
+  filter :completeness_status, as: :select, collection: -> { Season::COMPLETENESS_STATUSES }
 
   index do
     id_column
@@ -32,6 +33,7 @@ ActiveAdmin.register Season do
       row :completeness_status do |season|
         status_tag season.completeness_status
       end
+      row :populated_at
       row :league
       row :country do |season|
         season.league.country
