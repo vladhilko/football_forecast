@@ -15,6 +15,6 @@ class Season < ApplicationRecord
   has_many :matches
 
   validates :name, uniqueness: { scope: :league_id, case_sensitive: false }
-  validates :completeness_status, inclusion: { in: COMPLETENESS_STATUSES }
+  validates :completeness_status, inclusion: { in: Constants.season.completeness_statuses.values }
 
 end
