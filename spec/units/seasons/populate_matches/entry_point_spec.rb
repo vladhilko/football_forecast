@@ -42,36 +42,33 @@ describe Seasons::PopulateMatches::EntryPoint do
   end
 
   it 'populates database with all matches for the given season' do
-    expect { subject }.to change(Match, :count).by(2)
-      .and change(BettingOdds, :count).by(2)
-      .and change { season.reload.completeness_status }.from('initial').to('full')
-
-    match_1 = Match.first
-    expect(match_1).to have_attributes(
-      home_team: 'Brentford',
-      away_team: 'Fulham',
-      score: '1:2 ET',
-      date: '04 Aug 2021'.to_date,
-      season:
-    )
-    expect(match_1.betting_odds).to have_attributes(
-      home_team_win: 2.13,
-      draw: 3.16,
-      away_team_win: 3.82
-    )
-
-    match_2 = Match.second
-    expect(match_2).to have_attributes(
-      home_team: 'Fulham',
-      away_team: 'Brentford',
-      score: '1:2',
-      date: '30 Jul 2021'.to_date,
-      season:
-    )
-    expect(match_2.betting_odds).to have_attributes(
-      home_team_win: 2.04,
-      draw: 3.48,
-      away_team_win: 3.70
-    )
+    expect { subject }.to change(Match, :all).from([]).to(
+      [
+        an_object_having_attributes(
+          home_team: 'Brentford',
+          away_team: 'Fulham',
+          score: '1:2 ET',
+          date: '04 Aug 2021'.to_date,
+          season:,
+          betting_odds: an_object_having_attributes(
+            home_team_win: 2.13,
+            draw: 3.16,
+            away_team_win: 3.82
+          )
+        ),
+        an_object_having_attributes(
+          home_team: 'Fulham',
+          away_team: 'Brentford',
+          score: '1:2',
+          date: '30 Jul 2021'.to_date,
+          season:,
+          betting_odds: an_object_having_attributes(
+            home_team_win: 2.04,
+            draw: 3.48,
+            away_team_win: 3.70
+          )
+        )
+      ]
+    ).and change { season.reload.completeness_status }.from('initial').to('full')
   end
 end
