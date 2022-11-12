@@ -2,7 +2,10 @@
 
 class BaseEntryPoint
 
+  include Authorizable
+
   def call
+    authorize!
     validate_inputs!
     action.call
   end
