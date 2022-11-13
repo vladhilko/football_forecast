@@ -14,6 +14,18 @@ ActiveAdmin.register Season do
   filter :name
   filter :completeness_status, as: :select, collection: -> { Constants.season.completeness_statuses.values }
 
+  action_item :populate_matches, only: :show do
+    link_to 'Populate Matches', populate_matches_admin_season_path(resource), method: :post
+  end
+
+  member_action :populate_matches, method: :post do
+    ActiveRecord::Base.transaction { Seasons::PopulateMatches::EntryPoint.call(season: resource) }
+
+    redirect_to admin_season_path(resource), notice: 'Season matches population has been completed'
+  rescue Errors::SeasonIsAlreadyPopulated => e
+    redirect_to admin_season_path(resource), alert: e.message
+  end
+
   index do
     id_column
     column :name

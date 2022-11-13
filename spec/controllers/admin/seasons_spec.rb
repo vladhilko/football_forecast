@@ -63,4 +63,16 @@ describe Admin::SeasonsController, type: :controller do
       )
     end
   end
+
+  describe 'POST #populate_matches' do
+    before { season_2008_2009 }
+
+    it 'calls Seasons::PopulateMatches unit' do
+      expect(Seasons::PopulateMatches::EntryPoint).to receive(:call).with(season: season_2008_2009)
+
+      post(:populate_matches, params: { id: season_2008_2009.id })
+
+      expect(response).to have_http_status(:redirect)
+    end
+  end
 end
