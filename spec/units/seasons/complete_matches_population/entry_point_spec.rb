@@ -16,7 +16,8 @@ describe Seasons::CompleteMatchesPopulation::EntryPoint do
     end
 
     it 'sets `completeness_status` to `full` and `populated_at` to the current time' do
-      expect { subject }.to change { season.reload.completeness_status }.from('initial').to('full')
+      expect { subject }.to change { season.reload.completeness_status }
+        .from(Constants.season.completeness_statuses.initial).to(Constants.season.completeness_statuses.full)
         .and change { season.reload.populated_at }.from(nil).to(Time.current)
     end
   end
@@ -27,13 +28,15 @@ describe Seasons::CompleteMatchesPopulation::EntryPoint do
     end
 
     it 'sets `completeness_status` to `partial`' do
-      expect { subject }.to change { season.reload.completeness_status }.from('initial').to('partial')
+      expect { subject }.to change { season.reload.completeness_status }
+        .from(Constants.season.completeness_statuses.initial).to(Constants.season.completeness_statuses.partial)
     end
   end
 
   context 'when 0 matches have been added' do
     it 'sets `completeness_status` to `empty`' do
-      expect { subject }.to change { season.reload.completeness_status }.from('initial').to('empty')
+      expect { subject }.to change { season.reload.completeness_status }
+        .from(Constants.season.completeness_statuses.initial).to(Constants.season.completeness_statuses.empty)
     end
   end
 end

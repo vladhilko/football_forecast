@@ -25,9 +25,9 @@ module Seasons
 
       def completeness_status
         case season_matches.size
-        when 0 then 'empty'
-        when (required_season_games_count...) then 'full'
-        when (1...required_season_games_count) then 'partial'
+        when 0 then Constants.season.completeness_statuses.empty
+        when (required_season_games_count...) then Constants.season.completeness_statuses.full
+        when (1...required_season_games_count) then Constants.season.completeness_statuses.partial
         end
       end
 

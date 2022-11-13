@@ -70,7 +70,8 @@ describe Seasons::PopulateMatches::EntryPoint do
             )
           )
         ]
-      ).and change { season.reload.completeness_status }.from('initial').to('full')
+      ).and change { season.reload.completeness_status }
+        .from(Constants.season.completeness_statuses.initial).to(Constants.season.completeness_statuses.full)
     end
   end
 
