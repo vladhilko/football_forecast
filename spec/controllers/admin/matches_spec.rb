@@ -44,7 +44,12 @@ describe Admin::MatchesController, type: :controller do
   end
 
   describe 'GET #show' do
-    before { match_1 }
+    let(:match_1_betting_odds) { create(:betting_odds, match: match_1) }
+
+    before do
+      match_1
+      match_1_betting_odds
+    end
 
     it 'renders the given match' do
       get(:show, params: { id: match_1.id })
@@ -59,6 +64,9 @@ describe Admin::MatchesController, type: :controller do
         match_1.time.strftime('%H:%M'),
         match_1.created_at.strftime('%B %d, %Y %H:%M'),
         match_1.updated_at.strftime('%B %d, %Y %H:%M'),
+        match_1_betting_odds.home_team_win.to_s,
+        match_1_betting_odds.draw.to_s,
+        match_1_betting_odds.away_team_win.to_s,
         season_2008_2009.name,
         premier_league.name
       )

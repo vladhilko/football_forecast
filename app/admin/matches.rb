@@ -44,5 +44,13 @@ ActiveAdmin.register Match do
       row :created_at
       row :updated_at
     end
+
+    panel 'Betting Odds' do
+      table_for resource.betting_odds do
+        column :home_team_win
+        column :draw
+        column :away_team_win
+      end
+    end
   end
 end
