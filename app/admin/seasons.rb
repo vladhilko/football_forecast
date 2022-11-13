@@ -52,11 +52,13 @@ ActiveAdmin.register Season do
       row :country do |season|
         season.league.country
       end
-      row 'Populated Matches Count' do |season|
-        Queries::Match.by_season(season).count
-      end
       row :created_at
       row :updated_at
+      row 'Populated matches' do |season|
+        matches = Queries::Match.by_season(season)
+        view_all_params = { 'q[season_id_equals]': season.id, order: 'date_asc' }
+        link_to "View all matches (#{matches.size})", admin_matches_path(view_all_params)
+      end
     end
   end
 end
