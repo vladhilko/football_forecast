@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :league do
-    name { 'Premier League' }
+    name { Faker::Sports::Football.unique.competition }
     association :country
   end
 end

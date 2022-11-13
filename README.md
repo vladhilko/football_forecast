@@ -52,10 +52,16 @@ The following rake task fetch all football leagues from all countries and save t
 foo@bar:~$ rake leagues:fetch_all
 ```
 
-The following rake task fetch all available fotball seasons and save them to the database.
+The following rake task fetch all available football seasons and save them to the database.
 
 ```console
 foo@bar:~$ rake seasons:fetch_all
+```
+
+The following rake task fetch all available football matches for the given season and save them to the database.
+
+```console
+foo@bar:~$ rake seasons:fetch_all_matches['England', 'Premier League', '2021/2022']
 ```
 
 ### Development
