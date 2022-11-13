@@ -11,7 +11,7 @@ module Constants
     }
 
     OpenStruct.new(
-      completeness_statuses: OpenStruct.new(values: completeness_statuses.values, **completeness_statuses)
-    )
+      completeness_statuses: OpenStruct.new(values: completeness_statuses.values, **completeness_statuses).freeze
+    ).freeze
   end
 end
