@@ -73,6 +73,24 @@ describe Seasons::PopulateMatches::EntryPoint do
       ).and change { season.reload.completeness_status }
         .from(Constants.season.completeness_statuses.initial).to(Constants.season.completeness_statuses.full)
     end
+
+    context 'when some matches are already present for the given season' do
+      let(:season) do
+        create(:season,
+               league: premier_league,
+               name: '2021/2022',
+               completeness_status: Constants.season.completeness_statuses.partial)
+      end
+      let(:match) { create(:match, home_team: 'Fulham', away_team: 'Brentford', date: '30 Jul 2021', season:) }
+
+      before { match }
+
+      it 'populates missing matches' do
+        expect { subject }.to change(Match, :count).from(1).to(2)
+          .and change { season.reload.completeness_status }
+          .from(Constants.season.completeness_statuses.partial).to(Constants.season.completeness_statuses.full)
+      end
+    end
   end
 
   context 'when season is already populated' do
