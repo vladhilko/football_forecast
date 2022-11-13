@@ -50,6 +50,9 @@ ActiveAdmin.register Season do
       row :country do |season|
         season.league.country
       end
+      row 'Populated Matches Count' do |season|
+        Queries::Match.by_season(season).count
+      end
       row :created_at
       row :updated_at
     end
