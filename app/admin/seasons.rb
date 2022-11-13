@@ -4,11 +4,13 @@ ActiveAdmin.register Season do
   actions :index, :show
 
   config.batch_actions = false
+  config.sort_order = 'name_desc'
 
   includes league: :country
 
-  filter :league
   filter :league_country_id, as: :select, label: 'Country', collection: -> { Country.all.order(:name) }
+  filter :league, as: :select, label: 'League',
+                  collection: -> { Queries::League.by_country(params.dig(:q, :league_country_id_eq)) }
 
   filter :id
   filter :name
