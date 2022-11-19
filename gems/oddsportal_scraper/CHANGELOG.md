@@ -11,3 +11,7 @@
 ## [0.2.1] - 2022-10-30
 
 - Matches scraper can accept a new format for the season (`2020/2021`)
+
+## [0.2.2] - 2022-11-19
+
+- Return empty response for invalid urls.
