@@ -34,6 +34,13 @@ docker-compose up mysql8
 rails s
 ```
 
+### Check lefthook
+
+```bash
+lefthook install
+lefthook run pre-commit
+```
+
 ### OddsportalScraper
 
 [OddsportalScraper README](gems/oddsportal_scraper/README.md)
