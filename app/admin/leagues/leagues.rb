@@ -1,32 +1,31 @@
 # frozen_string_literal: true
 
-ActiveAdmin.register Country do
+ActiveAdmin.register League do
+  menu parent: 'Leagues', label: 'League details'
+
   actions :index, :show
 
   config.batch_actions = false
 
+  includes :country
+
   filter :id
   filter :name
+  filter :country
 
   index do
     id_column
     column :name
+    column :country
   end
 
   show do
     attributes_table do
       row :id
       row :name
+      row :country
       row :created_at
       row :updated_at
-    end
-
-    panel 'Leagues' do
-      table_for resource.leagues do
-        column :name do |league|
-          link_to league.name, admin_league_path(league)
-        end
-      end
     end
   end
 end

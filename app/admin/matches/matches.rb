@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Match do
+  menu parent: 'Matches', label: 'Match details'
+
   actions :index, :show
 
   config.batch_actions = false

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Season do
+  menu parent: 'Leagues'
+
   actions :index, :show
 
   config.batch_actions = false
