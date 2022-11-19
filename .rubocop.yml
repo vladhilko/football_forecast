@@ -93,6 +93,9 @@ Metrics/MethodLength:
 Metrics/AbcSize:
   Exclude:
     - "lib/tasks/**/*.rake"
+Naming/ConstantName:
+  Exclude:
+    - "lib/types/**/*.rb"
 
 # RSpec
 Layout/MultilineMethodCallIndentation:
