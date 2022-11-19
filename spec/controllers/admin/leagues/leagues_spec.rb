@@ -35,7 +35,12 @@ describe Admin::LeaguesController, type: :controller do
   end
 
   describe 'GET #show' do
-    before { premier_league }
+    before do
+      premier_league
+      season_2008_2009
+    end
+
+    let(:season_2008_2009) { create(:season, league: premier_league, name: '2008/2009') }
 
     it 'renders league' do
       get(:show, params: { id: premier_league.id })
@@ -46,7 +51,8 @@ describe Admin::LeaguesController, type: :controller do
         premier_league.name,
         premier_league.created_at.strftime('%B %d, %Y %H:%M'),
         premier_league.updated_at.strftime('%B %d, %Y %H:%M'),
-        england.name
+        england.name,
+        season_2008_2009.name
       )
     end
   end

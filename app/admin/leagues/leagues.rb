@@ -27,5 +27,13 @@ ActiveAdmin.register League do
       row :created_at
       row :updated_at
     end
+
+    panel 'Seasons' do
+      table_for resource.seasons do
+        column :name do |season|
+          link_to season.name, admin_season_path(season)
+        end
+      end
+    end
   end
 end
