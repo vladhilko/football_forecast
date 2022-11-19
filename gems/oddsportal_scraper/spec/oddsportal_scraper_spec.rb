@@ -2,7 +2,7 @@
 
 RSpec.describe OddsportalScraper do
   it 'has a version number' do
-    expect(OddsportalScraper::VERSION).not_to be nil
+    expect(OddsportalScraper::VERSION).not_to be_nil
   end
 
   describe '.sport_names' do

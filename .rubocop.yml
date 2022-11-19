@@ -115,7 +115,64 @@ RSpec/MultipleExpectations:
   Max: 12
 RSpec/FilePath:
   SpecSuffixOnly: true
+# RSpec styles from new Rubocop Versions
+RSpec/BeNil: # new in 2.9.0
+  Enabled: true
+RSpec/ChangeByZero: # new in 2.11
+  Enabled: true
+RSpec/IdenticalEqualityAssertion: # new in 2.4
+  Enabled: true
+RSpec/SubjectDeclaration: # new in 2.5
+  Enabled: true
+RSpec/FactoryBot/SyntaxMethods: # new in 2.7
+  Enabled: true
+RSpec/Rails/AvoidSetupHook: # new in 2.4
+  Enabled: true
+RSpec/Rails/HaveHttpStatus: # new in 2.12
+  Enabled: true
+RSpec/BeEq: # new in 2.9.0
+  Enabled: true
+RSpec/ExcessiveDocstringSpacing: # new in 2.5
+  Enabled: true
 
 # Styles from new Rubocop Versions
 Rails/NegateInclude: # new in 2.7
+  Enabled: true
+Gemspec/DeprecatedAttributeAssignment: # new in 1.30
+  Enabled: true
+Lint/AmbiguousAssignment: # new in 1.7
+  Enabled: true
+Lint/DuplicateMagicComment: # new in 1.37
+  Enabled: true
+Lint/NumberedParameterAssignment: # new in 1.9
+  Enabled: true
+Lint/OrAssignmentToConstant: # new in 1.9
+  Enabled: true
+Lint/RequireRangeParentheses: # new in 1.32
+  Enabled: true
+Lint/LambdaWithoutLiteralBlock: # new in 1.8
+  Enabled: true
+Lint/NoReturnInBeginEndBlocks: # new in 1.2
+  Enabled: true
+Style/CollectionCompact: # new in 1.2
+  Enabled: true
+Style/FetchEnvVar: # new in 1.28
+  Enabled: true
+Style/RedundantInitialize: # new in 1.27
+  Enabled: true
+Style/MultilineInPatternThen: # new in 1.16
+  Enabled: true
+Style/NegatedIfElseCondition: # new in 1.2
+  Enabled: true
+Style/NumberedParameters: # new in 1.22
+  Enabled: true
+
+# Rails styles from new Rubocop Version
+Rails/WhereMissing: # new in 2.16
+  Enabled: true
+Rails/MigrationClassName: # new in 2.14
+  Enabled: true
+Rails/AddColumnIndex: # new in 2.11
+  Enabled: true
+Rails/FreezeTime: # new in 2.16
   Enabled: true
