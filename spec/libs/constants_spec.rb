@@ -18,4 +18,18 @@ RSpec.describe Constants do
       it { is_expected.to contain_exactly('full', 'initial', 'partial', 'ongoing', 'empty') }
     end
   end
+
+  describe 'Constants.match.result_types' do
+    subject { described_class.match.result_types }
+
+    it "returns correct value for `cancelled` status" do
+      expect(subject.cancelled).to eq('canc.')
+    end
+
+    describe '.values' do
+      subject { described_class.match.result_types.values }
+
+      it { is_expected.to contain_exactly('canc.') }
+    end
+  end
 end

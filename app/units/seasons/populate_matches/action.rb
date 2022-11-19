@@ -11,7 +11,7 @@ module Seasons
       end
 
       def call
-        fetched_matches.lazy.each do |match_params|
+        not_cancelled_matches.lazy.each do |match_params|
           mapped_params = oddsportal_match_params_mapping(match_params)
 
           CreateMatch::EntryPoint.call(season:, params: mapped_params) unless match_present?(mapped_params)
@@ -23,6 +23,10 @@ module Seasons
       private
 
       attr_reader :season, :league, :country
+
+      def not_cancelled_matches
+        fetched_matches.reject { _1.fetch(:score) == Constants.match.result_types.cancelled }
+      end
 
       def fetched_matches
         OddsportalScraper.matches(sport: 'soccer', country: country.name, league: league.name, season: season.name)
