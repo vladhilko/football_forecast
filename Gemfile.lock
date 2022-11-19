@@ -241,6 +241,7 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
+    lefthook (1.2.1)
     loofah (2.19.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -466,6 +467,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   kimurai!
+  lefthook
   mysql2 (~> 0.5.4)
   oddsportal_scraper!
   pry-rails
