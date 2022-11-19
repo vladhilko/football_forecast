@@ -22,7 +22,7 @@ RSpec.describe Constants do
   describe 'Constants.match.result_types' do
     subject { described_class.match.result_types }
 
-    it "returns correct value for `cancelled` status" do
+    it 'returns correct value for `cancelled` status' do
       expect(subject.cancelled).to eq('canc.')
     end
 
