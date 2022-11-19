@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register AdminUser do
-  menu parent: "Systems"
+  menu parent: 'Systems'
 
   permit_params :email, :password, :password_confirmation
 
