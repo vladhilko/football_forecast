@@ -30,7 +30,12 @@ describe Admin::CountriesController, type: :controller do
   end
 
   describe 'GET #show' do
-    before { england }
+    before do
+      england
+      premier_league
+    end
+
+    let(:premier_league) { create(:league, country: england, name: 'Premier League') }
 
     it 'renders country' do
       get(:show, params: { id: england.id })
@@ -40,7 +45,8 @@ describe Admin::CountriesController, type: :controller do
         england.id.to_s,
         england.name,
         england.created_at.strftime('%B %d, %Y %H:%M'),
-        england.updated_at.strftime('%B %d, %Y %H:%M')
+        england.updated_at.strftime('%B %d, %Y %H:%M'),
+        premier_league.name
       )
     end
   end
