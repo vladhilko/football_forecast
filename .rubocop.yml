@@ -118,6 +118,8 @@ RSpec/MultipleExpectations:
   Max: 12
 RSpec/FilePath:
   SpecSuffixOnly: true
+RSpec/NestedGroups:
+  Enabled: false
 # RSpec styles from new Rubocop Versions
 RSpec/BeNil: # new in 2.9.0
   Enabled: true

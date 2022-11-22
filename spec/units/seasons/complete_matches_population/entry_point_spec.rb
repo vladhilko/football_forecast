@@ -39,4 +39,32 @@ describe Seasons::CompleteMatchesPopulation::EntryPoint do
         .from(Constants.season.completeness_statuses.initial).to(Constants.season.completeness_statuses.empty)
     end
   end
+
+  context 'when the given season is still in progress' do
+    before do
+      travel_to '01.01.2022'.to_date
+
+      create(:match, season:, home_team: 'Arsenal', away_team: 'Liverpool')
+    end
+
+    context 'when season is 2022/2023' do
+      let(:season) { create(:season, name: '2022/2023') }
+
+      it 'sets `completeness_status` to `ongoing`' do
+        expect { subject }.to change { season.reload.completeness_status }
+          .from(Constants.season.completeness_statuses.initial).to(Constants.season.completeness_statuses.ongoing)
+      end
+
+      context 'when all matches have been played already' do
+        before do
+          create(:match, season:, home_team: 'Liverpool', away_team: 'Arsenal')
+        end
+
+        it 'sets `completeness_status` to `full`' do
+          expect { subject }.to change { season.reload.completeness_status }
+            .from(Constants.season.completeness_statuses.initial).to(Constants.season.completeness_statuses.full)
+        end
+      end
+    end
+  end
 end
