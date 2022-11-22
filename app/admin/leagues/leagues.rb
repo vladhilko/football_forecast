@@ -33,6 +33,10 @@ ActiveAdmin.register League do
         column :name do |season|
           link_to season.name, admin_season_path(season)
         end
+
+        column :completeness_status do |season|
+          status_tag season.completeness_status
+        end
       end
     end
   end

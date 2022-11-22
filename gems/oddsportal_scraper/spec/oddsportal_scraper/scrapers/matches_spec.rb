@@ -53,5 +53,14 @@ RSpec.describe OddsportalScraper::Scrapers::Matches do
 
       it { is_expected.to eq([]) }
     end
+
+    context 'when there is no odds available for the given season' do
+      let(:sport_name) { 'soccer' }
+      let(:country) { 'England' }
+      let(:league) { 'Premier League' }
+      let(:season) { '1998/1999' }
+
+      it { is_expected.to eq([]) }
+    end
   end
 end

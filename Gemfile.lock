@@ -22,7 +22,7 @@ GIT
 PATH
   remote: gems/oddsportal_scraper
   specs:
-    oddsportal_scraper (0.2.2)
+    oddsportal_scraper (0.2.3)
       kimurai
       wombat (~> 3.0.0)
 

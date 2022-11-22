@@ -52,7 +52,8 @@ describe Admin::LeaguesController, type: :controller do
         premier_league.created_at.strftime('%B %d, %Y %H:%M'),
         premier_league.updated_at.strftime('%B %d, %Y %H:%M'),
         england.name,
-        season_2008_2009.name
+        season_2008_2009.name,
+        season_2008_2009.completeness_status
       )
     end
   end
