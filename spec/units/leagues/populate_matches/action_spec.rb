@@ -11,7 +11,8 @@ describe Leagues::PopulateMatches::Action do
   let(:season_status) { Constants.season.completeness_statuses.initial }
 
   it 'calls Seasons::PopulateMatches unit with valid params' do
-    expect(Queries::Season).to receive(:by_league).with(premier_league).and_return([season_1, season_2])
+    expect(Queries::Season).to receive(:by_league_and_status).with(premier_league, season_status)
+      .and_return([season_1, season_2])
 
     expect(Seasons::PopulateMatches::EntryPoint).to receive(:call).with(season: season_1)
     expect(Seasons::PopulateMatches::EntryPoint).to receive(:call).with(season: season_2)

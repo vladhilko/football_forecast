@@ -20,7 +20,7 @@ module Leagues
       attr_reader :league, :season_status
 
       def league_seasons
-        Queries::Season.by_league(league)
+        Queries::Season.by_league_and_status(league, season_status)
       end
 
     end
