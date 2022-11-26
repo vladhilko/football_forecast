@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 module Queries
-  class League
+  class League < Query
 
-    class << self
+    set_model ::League
 
+    module Scopes
       def by_country(country)
-        ::League.where(country:)
+        where(country:)
       end
-
     end
 
   end

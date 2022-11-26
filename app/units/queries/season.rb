@@ -1,22 +1,22 @@
 # frozen_string_literal: true
 
 module Queries
-  class Season
+  class Season < Query
 
-    class << self
+    set_model ::Season
 
+    module Scopes
       def by_league(league)
-        ::Season.where(league:)
+        where(league:)
       end
 
       def by_league_and_status(league, status)
-        ::Season.where(league:, completeness_status: status)
+        by_league(league).by_completeness_status(status)
       end
 
       def by_completeness_status(completeness_status)
-        ::Season.where(completeness_status:)
+        where(completeness_status:)
       end
-
     end
 
   end
