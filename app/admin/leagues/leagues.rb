@@ -13,6 +13,16 @@ ActiveAdmin.register League do
   filter :name
   filter :country
 
+  action_item :populate_matches, only: :show do
+    link_to 'Populate All Initial Seasons', populate_matches_admin_league_path(resource), method: :post
+  end
+
+  member_action :populate_matches, method: :post do
+    ActiveRecord::Base.transaction { Leagues::PopulateMatches::EntryPoint.call(league: resource) }
+
+    redirect_to admin_season_path(resource), notice: 'All league matches population has been completed'
+  end
+
   index do
     id_column
     column :name

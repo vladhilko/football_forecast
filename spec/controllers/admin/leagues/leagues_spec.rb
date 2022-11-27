@@ -53,8 +53,27 @@ describe Admin::LeaguesController, type: :controller do
         premier_league.updated_at.strftime('%B %d, %Y %H:%M'),
         england.name,
         season_2008_2009.name,
-        season_2008_2009.completeness_status
+        season_2008_2009.completeness_status,
+        'Populate All Initial Seasons'
       )
+    end
+  end
+
+  describe 'POST #populate_matches' do
+    let(:season_2008_2009) { create(:season, league: premier_league, name: '2008/2009') }
+    let(:season_2009_2010) { create(:season, league: premier_league, name: '2009/2010') }
+
+    before do
+      season_2008_2009
+      season_2009_2010
+    end
+
+    it 'calls Leagues::PopulateMatches unit' do
+      expect(Leagues::PopulateMatches::EntryPoint).to receive(:call).with(league: premier_league)
+
+      post(:populate_matches, params: { id: premier_league.id })
+
+      expect(response).to have_http_status(:redirect)
     end
   end
 end
