@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Country do
+  menu parent: 'Leagues'
+
   actions :index, :show
 
   config.batch_actions = false
@@ -19,6 +21,14 @@ ActiveAdmin.register Country do
       row :name
       row :created_at
       row :updated_at
+    end
+
+    panel 'Leagues' do
+      table_for resource.leagues do
+        column :name do |league|
+          link_to league.name, admin_league_path(league)
+        end
+      end
     end
   end
 end

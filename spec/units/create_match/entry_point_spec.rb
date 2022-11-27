@@ -51,14 +51,17 @@ describe CreateMatch::EntryPoint do
         away_team: '',
         score: '',
         date: '',
-        time: ''
+        time: '',
+        betting_odds: {
+          home_team_win: '',
+          away_team_win: '',
+          draw: ''
+        }
       }
     end
 
     it 'raises a validation error', :aggregate_failures do
       expect { subject }.to raise_error(Errors::InvalidInputsParams) do |error|
-        expect(error.errors[:home_team]).to contain_exactly('must be filled')
-        expect(error.errors[:away_team]).to contain_exactly('must be filled')
         expect(error.errors[:score]).to contain_exactly('must be filled')
         expect(error.errors[:date]).to contain_exactly('must be filled')
       end

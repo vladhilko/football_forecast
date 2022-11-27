@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 module Queries
-  class Match
+  class Match < Query
 
-    class << self
+    set_model ::Match
 
+    module Scopes
       def by_season(season)
-        ::Match.where(season:)
+        where(season:)
       end
-
     end
 
   end

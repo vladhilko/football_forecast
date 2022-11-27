@@ -6,6 +6,7 @@ module Seasons
 
       def initialize(season:)
         @season = season
+        @decorated_season = Decorators::Season.new(season)
       end
 
       def call
@@ -17,18 +18,26 @@ module Seasons
 
       private
 
-      attr_reader :season
+      attr_reader :season, :decorated_season
 
       def season_matches
         @season_matches ||= Queries::Match.by_season(season)
       end
 
       def completeness_status
-        case season_matches.size
-        when 0 then Constants.season.completeness_statuses.empty
-        when (required_season_games_count...) then Constants.season.completeness_statuses.full
-        when (1...required_season_games_count) then Constants.season.completeness_statuses.partial
-        end
+        return status_by_season_games if status_by_season_games == Constants.season.completeness_statuses.full
+        return Constants.season.completeness_statuses.ongoing if decorated_season.active?
+
+        status_by_season_games
+      end
+
+      def status_by_season_games
+        @status_by_season_games ||=
+          case season_matches.count
+          when 0 then Constants.season.completeness_statuses.empty
+          when (required_season_games_count...) then Constants.season.completeness_statuses.full
+          when (1...required_season_games_count) then Constants.season.completeness_statuses.partial
+          end
       end
 
       def league_teams_count

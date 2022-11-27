@@ -35,7 +35,12 @@ describe Admin::LeaguesController, type: :controller do
   end
 
   describe 'GET #show' do
-    before { premier_league }
+    before do
+      premier_league
+      season_2008_2009
+    end
+
+    let(:season_2008_2009) { create(:season, league: premier_league, name: '2008/2009') }
 
     it 'renders league' do
       get(:show, params: { id: premier_league.id })
@@ -46,8 +51,29 @@ describe Admin::LeaguesController, type: :controller do
         premier_league.name,
         premier_league.created_at.strftime('%B %d, %Y %H:%M'),
         premier_league.updated_at.strftime('%B %d, %Y %H:%M'),
-        england.name
+        england.name,
+        season_2008_2009.name,
+        season_2008_2009.completeness_status,
+        'Populate All Initial Seasons'
       )
+    end
+  end
+
+  describe 'POST #populate_matches' do
+    let(:season_2008_2009) { create(:season, league: premier_league, name: '2008/2009') }
+    let(:season_2009_2010) { create(:season, league: premier_league, name: '2009/2010') }
+
+    before do
+      season_2008_2009
+      season_2009_2010
+    end
+
+    it 'calls Leagues::PopulateMatches unit' do
+      expect(Leagues::PopulateMatchesJob).to receive(:perform_async).with(premier_league.id)
+
+      post(:populate_matches, params: { id: premier_league.id })
+
+      expect(response).to have_http_status(:redirect)
     end
   end
 end

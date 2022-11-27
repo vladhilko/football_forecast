@@ -18,7 +18,11 @@
 @import "active_admin/variables";
 @import "active_admin/header";
 
-.status_tag.full { background: #008000; }
+.status_tag.full { background: $lime-green; }
+.status_tag.empty { background: $burgundy; }
+.status_tag.partial { background: $apricot; }
+.status_tag.ongoing { background: $blue-grotto; }
+
 
 
 // Overriding any non-variable Sass must be done after the fact.

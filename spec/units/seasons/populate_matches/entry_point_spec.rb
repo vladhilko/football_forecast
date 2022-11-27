@@ -91,6 +91,55 @@ describe Seasons::PopulateMatches::EntryPoint do
           .from(Constants.season.completeness_statuses.partial).to(Constants.season.completeness_statuses.full)
       end
     end
+
+    context 'when some matches were cancelled' do
+      let(:matches) do
+        [
+          {
+            "match_date": '04 Aug 2021',
+            "match_time": '19:45',
+            "participants": 'Brentford - Fulham',
+            "score": 'canc.',
+            "odds": {
+              "home_win": nil,
+              "draw": nil,
+              "away_win": nil
+            }
+          },
+          {
+            "match_date": '30 Jul 2021',
+            "match_time": '19:45',
+            "participants": 'Fulham - Brentford',
+            "score": '1:2',
+            "odds": {
+              "home_win": '2.04',
+              "draw": '3.48',
+              "away_win": '3.70'
+            }
+          }
+        ]
+      end
+
+      it 'populates database with only not cancelled matches for the given season' do
+        expect { subject }.to change(Match, :all).from([]).to(
+          [
+            an_object_having_attributes(
+              home_team: 'Fulham',
+              away_team: 'Brentford',
+              score: '1:2',
+              date: '30 Jul 2021'.to_date,
+              season:,
+              betting_odds: an_object_having_attributes(
+                home_team_win: 2.04,
+                draw: 3.48,
+                away_team_win: 3.70
+              )
+            )
+          ]
+        ).and change { season.reload.completeness_status }
+          .from(Constants.season.completeness_statuses.initial).to(Constants.season.completeness_statuses.partial)
+      end
+    end
   end
 
   context 'when season is already populated' do

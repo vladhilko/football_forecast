@@ -1,0 +1,6 @@
+pre-commit:
+  commands:
+    rubocop:
+      staged_files: git diff --name-only --staged
+      glob: "*.rb"
+      run: bundle exec rubocop --force-exclusion --safe-auto-correct {staged_files}

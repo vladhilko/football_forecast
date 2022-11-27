@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register BettingOdds do
+  menu parent: 'Matches'
+
   actions :index, :show
 
   config.batch_actions = false

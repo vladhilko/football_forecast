@@ -23,15 +23,28 @@ rvm install 3.1.2
 yarn install
 ```
 
-### 2. Start database
+### 2. Start database and redis
 
 ```bash
-docker-compose up mysql8
+docker-compose up mysql8 redis7
 ```
 ### 3. Start server
 
 ```bash
 rails s
+```
+
+### Check lefthook
+
+```bash
+lefthook install
+lefthook run pre-commit
+```
+
+### Run Sidekiq
+
+```bash
+bundle exec sidekiq
 ```
 
 ### OddsportalScraper

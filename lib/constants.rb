@@ -14,4 +14,14 @@ module Constants
       completeness_statuses: OpenStruct.new(values: completeness_statuses.values, **completeness_statuses).freeze
     ).freeze
   end
+
+  def self.match
+    result_types = {
+      cancelled: 'canc.'
+    }
+
+    OpenStruct.new(
+      result_types: OpenStruct.new(values: result_types.values, **result_types).freeze
+    ).freeze
+  end
 end

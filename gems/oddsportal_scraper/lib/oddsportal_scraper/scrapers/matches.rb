@@ -23,6 +23,8 @@ module OddsportalScraper
       end
 
       def parse(response, url:, **)
+        return [] if page_does_not_exist?(response) || no_odds_available_for_the_season?(response)
+
         last_page_num = response.css('div#pagination a').last.attributes.fetch('href').value.split('/').last.to_i
         all_season_matches = []
 
@@ -34,6 +36,18 @@ module OddsportalScraper
       end
 
       private
+
+      def page_does_not_exist?(response)
+        response.css('#col-content h1').text == 'Page not found' &&
+          response.css('#col-content p').text == 'This page not exist on OddsPortal.com!'
+      end
+
+      def no_odds_available_for_the_season?(response)
+        response.css('div.message-info ul li div.cms').last.text.include?(
+          'Unfortunately, '\
+          'no matches can be displayed because there are no odds available from your selected bookmakers.'
+        )
+      end
 
       def parse_page_with_matches # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
         tournament_table = browser.current_response.css('div#tournamentTable')
