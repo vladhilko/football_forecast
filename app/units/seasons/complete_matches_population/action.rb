@@ -33,7 +33,7 @@ module Seasons
 
       def status_by_season_games
         @status_by_season_games ||=
-          case season_matches.size
+          case season_matches.count
           when 0 then Constants.season.completeness_statuses.empty
           when (required_season_games_count...) then Constants.season.completeness_statuses.full
           when (1...required_season_games_count) then Constants.season.completeness_statuses.partial
