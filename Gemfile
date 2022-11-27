@@ -56,6 +56,7 @@ gem 'dry-struct', '~> 1.4'
 gem 'dry-types', '~> 1.5', '>= 1.5.1'
 gem 'dry-validation', '~> 1.10.0'
 gem 'draper'
+gem 'sidekiq'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"

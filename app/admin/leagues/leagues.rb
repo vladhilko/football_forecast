@@ -18,9 +18,9 @@ ActiveAdmin.register League do
   end
 
   member_action :populate_matches, method: :post do
-    ActiveRecord::Base.transaction { Leagues::PopulateMatches::EntryPoint.call(league: resource) }
+    Leagues::PopulateMatchesJob.perform_async(resource.id)
 
-    redirect_to admin_season_path(resource), notice: 'All league matches population has been completed'
+    redirect_to admin_season_path(resource), notice: 'All league matches population has been started'
   end
 
   index do

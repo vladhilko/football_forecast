@@ -69,7 +69,7 @@ describe Admin::LeaguesController, type: :controller do
     end
 
     it 'calls Leagues::PopulateMatches unit' do
-      expect(Leagues::PopulateMatches::EntryPoint).to receive(:call).with(league: premier_league)
+      expect(Leagues::PopulateMatchesJob).to receive(:perform_async).with(premier_league.id)
 
       post(:populate_matches, params: { id: premier_league.id })
 

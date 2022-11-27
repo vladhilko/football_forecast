@@ -12,6 +12,16 @@ services:
       - 3307
     volumes:
       - mysql8:/var/lib/mysql
+  redis7:
+    image: redis:7.0.5
+    container_name: redis7
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis7:/var/lib/redis/data:cached
+
 volumes:
   mysql8:
+    driver: local
+  redis7:
     driver: local
