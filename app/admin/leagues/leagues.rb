@@ -7,7 +7,7 @@ ActiveAdmin.register League do
 
   config.batch_actions = false
 
-  includes :country
+  includes :country, :seasons
 
   filter :id
   filter :name
@@ -27,6 +27,13 @@ ActiveAdmin.register League do
     id_column
     column :name
     column :country
+    column 'Completeness Status' do |league|
+      if league.seasons.all? { _1.completeness_status == Constants.season.completeness_statuses.initial }
+        status_tag 'initial'
+      else
+        status_tag 'in progress', class: 'ongoing'
+      end
+    end
   end
 
   show do
