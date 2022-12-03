@@ -16,7 +16,7 @@ services:
     image: redis:7.0.5
     container_name: redis7
     ports:
-      - "6379:6379"
+      - "6380:6380"
     volumes:
       - redis7:/var/lib/redis/data:cached
 
