@@ -11,7 +11,7 @@ module Leagues
 
       def call
         league_seasons.each do |season|
-          Seasons::PopulateMatches::EntryPoint.call(season:)
+          Seasons::PopulateMatchesJob.perform_async(season.id)
         end
       end
 
