@@ -10,7 +10,7 @@ describe Leagues::PopulateMatches::Action do
   let(:season_2) { build_stubbed(:season, name: '2021/2022') }
   let(:season_status) { Constants.season.completeness_statuses.initial }
 
-  it 'calls Seasons::PopulateMatchesJob  with valid params' do
+  it 'calls Seasons::PopulateMatchesJob with valid params' do
     expect(Queries::Season).to receive(:by_league_and_status).with(premier_league, season_status)
       .and_return([season_1, season_2])
 
