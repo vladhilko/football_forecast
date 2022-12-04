@@ -29,7 +29,8 @@ describe Admin::LeaguesController, type: :controller do
         england.name,
         laliga.id.to_s,
         laliga.name,
-        spain.name
+        spain.name,
+        'Initial'
       )
     end
   end

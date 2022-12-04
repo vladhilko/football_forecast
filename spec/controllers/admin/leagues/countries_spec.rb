@@ -50,4 +50,22 @@ describe Admin::CountriesController, type: :controller do
       )
     end
   end
+
+  describe 'POST #populate_matches' do
+    let(:premier_league) { create(:league, country: england, name: 'Premier League') }
+    let(:championship) { create(:league, country: england, name: 'championship') }
+
+    before do
+      premier_league
+      championship
+    end
+
+    it 'calls Countries::PopulateMatches unit' do
+      expect(Countries::PopulateMatchesJob).to receive(:perform_async).with(england.id)
+
+      post(:populate_matches, params: { id: england.id })
+
+      expect(response).to have_http_status(:redirect)
+    end
+  end
 end

@@ -10,6 +10,16 @@ ActiveAdmin.register Country do
   filter :id
   filter :name
 
+  action_item :populate_matches, only: :show do
+    link_to 'Populate All Initial Seasons', populate_matches_admin_country_path(resource), method: :post
+  end
+
+  member_action :populate_matches, method: :post do
+    Countries::PopulateMatchesJob.perform_async(resource.id)
+
+    redirect_to admin_country_path(resource), notice: 'All country leagues matches population has been started'
+  end
+
   index do
     id_column
     column :name
