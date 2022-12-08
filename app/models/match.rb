@@ -15,6 +15,7 @@ class Match < ApplicationRecord
   def result
     return Constants.match.results.home_team_win if home_team_score > away_team_score
     return Constants.match.results.away_team_win if away_team_score > home_team_score
+
     Constants.match.results.draw
   end
 

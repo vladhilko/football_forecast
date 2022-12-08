@@ -32,4 +32,20 @@ RSpec.describe Constants do
       it { is_expected.to contain_exactly('canc.') }
     end
   end
+
+  describe 'Constants.match.results' do
+    subject { described_class.match.results }
+
+    %w[home_team_win draw away_team_win].each do |result|
+      it "returns correct value for #{result} result" do
+        expect(subject.public_send(result.to_sym)).to eq(result)
+      end
+    end
+
+    describe '.values' do
+      subject { described_class.match.results.values }
+
+      it { is_expected.to contain_exactly('home_team_win', 'draw', 'away_team_win') }
+    end
+  end
 end
