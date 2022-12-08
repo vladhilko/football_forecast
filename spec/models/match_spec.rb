@@ -23,4 +23,38 @@ RSpec.describe Match, type: :model do
 
     it { is_expected.to eq('Arsenal - Chelsea') }
   end
+
+  describe '#result' do
+    context 'when score is 3:1' do
+      subject { described_class.new(score: '3:1').result }
+
+      it { is_expected.to eq(Constants.match.results.home_team_win) }
+    end
+
+    context 'when score is 1:1' do
+      subject { described_class.new(score: '1:1').result }
+
+      it { is_expected.to eq(Constants.match.results.draw) }
+    end
+
+    context 'when score is 1:3' do
+      subject { described_class.new(score: '1:3').result }
+
+      it { is_expected.to eq(Constants.match.results.away_team_win) }
+    end
+  end
+
+  describe '#home_team?' do
+    context 'when Arsenal plays at home' do
+      subject { described_class.new(home_team: 'Arsenal', away_team: 'Chelsea').home_team?('Arsenal') }
+
+      it { is_expected.to be true }
+    end
+
+    context 'when Arsenal plays away' do
+      subject { described_class.new(home_team: 'Chelsea', away_team: 'Arsenal').home_team?('Arsenal') }
+
+      it { is_expected.to be false }
+    end
+  end
 end
