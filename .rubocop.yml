@@ -90,6 +90,7 @@ Naming/VariableNumber:
 Metrics/MethodLength:
   Exclude:
     - "lib/tasks/**/*.rake"
+    - "**/db/migrate/**/*.rb"
 Metrics/AbcSize:
   Exclude:
     - "lib/tasks/**/*.rake"

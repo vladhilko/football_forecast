@@ -5,6 +5,7 @@ class Match < ApplicationRecord
   belongs_to :season
 
   has_one :betting_odds
+  has_many :bets
 
   validates :home_team, uniqueness: { scope: %i[season_id away_team date], case_sensitive: false }
 
