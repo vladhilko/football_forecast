@@ -27,7 +27,7 @@ describe Betting::PlaceBet::EntryPoint do
         team: 'Arsenal',
         bet_type: 'win',
         odds: 2.45,
-        payout_amount: 100 * 2.45
+        payout_amount: 245
       )
     end
   end
