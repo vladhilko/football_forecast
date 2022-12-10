@@ -48,4 +48,18 @@ RSpec.describe Constants do
       it { is_expected.to contain_exactly('home_team_win', 'draw', 'away_team_win') }
     end
   end
+
+  describe 'Constants.active_admin.pages' do
+    subject { described_class.active_admin.pages }
+
+    it 'returns correct value for `calculate_season_profit` page' do
+      expect(subject.calculate_season_profit).to eq('Calculate Season Profit')
+    end
+
+    describe '.values' do
+      subject { described_class.active_admin.pages.values }
+
+      it { is_expected.to contain_exactly('Calculate Season Profit') }
+    end
+  end
 end

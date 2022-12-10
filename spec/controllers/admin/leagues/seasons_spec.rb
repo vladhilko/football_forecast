@@ -66,6 +66,7 @@ describe Admin::SeasonsController, type: :controller do
         season_2008_2009.created_at.strftime('%B %d, %Y %H:%M'),
         season_2008_2009.updated_at.strftime('%B %d, %Y %H:%M'),
         'Populate Matches',
+        'Calculate Season Profit',
         admin_matches_path
       )
     end

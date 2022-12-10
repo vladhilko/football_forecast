@@ -31,4 +31,14 @@ module Constants
       results: OpenStruct.new(values: results.values, **results).freeze
     ).freeze
   end
+
+  def self.active_admin
+    pages = {
+      calculate_season_profit: 'Calculate Season Profit'
+    }
+
+    OpenStruct.new(
+      pages: OpenStruct.new(values: pages.values, **pages).freeze
+    ).freeze
+  end
 end
