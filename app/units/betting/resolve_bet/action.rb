@@ -24,7 +24,7 @@ module Betting
       end
 
       def result
-        bet.match.result_for('Arsenal')
+        bet.match.result_for(bet.team)
       end
 
     end

@@ -24,7 +24,7 @@ ActiveAdmin.register_page Constants.active_admin.pages.calculate_season_profit d
       )
     end
 
-    redirect_to admin_season_path(season), notice: "Your profit is: #{profit}"
+    redirect_to admin_season_calculate_season_profit_path(season), notice: "Your profit is: #{profit}"
   end
 
   content do
