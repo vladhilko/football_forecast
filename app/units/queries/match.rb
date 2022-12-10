@@ -15,6 +15,11 @@ module Queries
           by_season(season).where(home_team: team)
         )
       end
+
+      # TODO: Move to the Decorator Collection object
+      def uniq_teams
+        flat_map { [_1.home_team, _1.away_team] }.uniq.sort
+      end
     end
 
   end

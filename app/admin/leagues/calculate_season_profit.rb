@@ -4,7 +4,10 @@ ActiveAdmin.register_page Constants.active_admin.pages.calculate_season_profit d
   belongs_to :season, parent_class: Season
 
   breadcrumb do
-    [link_to('Admin', admin_root_path), link_to('Seasons', admin_seasons_path)]
+    [
+      link_to('Admin', admin_root_path),
+      link_to("Season: #{params['season_id']}", admin_season_path(params['season_id']))
+    ]
   end
 
   page_action :calculate_season_profit, method: :post do
@@ -29,8 +32,11 @@ ActiveAdmin.register_page Constants.active_admin.pages.calculate_season_profit d
                                                      url: { action: :calculate_season_profit },
                                                      method: :post do |f|
       f.inputs name: 'Calculate Season Profit' do
-        f.input :team, label: 'Team', required: true
-        f.input :amount, label: 'Bet Amount', required: true
+        f.input :team, label: 'Team', required: true,
+                       include_blank: false,
+                       collection: Queries::Match.by_season(params['season_id']).uniq_teams
+
+        f.input :amount, label: 'Bet Amount', required: true, input_html: { value: '100' }
         f.input :bet_strategy, label: 'Bet Strategy', required: true, collection: ['always_win'], include_blank: false
       end
       f.actions do
