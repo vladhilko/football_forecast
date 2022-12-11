@@ -6,7 +6,7 @@ module Seasons
 
       def initialize(season:, params:)
         @form = Form.new(params:)
-        @action = Action.new(season:, params:)
+        @action = Action.new(season:, form:)
       end
 
     end

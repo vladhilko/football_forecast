@@ -4,11 +4,9 @@ module Seasons
   module CalculateProfit
     class Action
 
-      def initialize(season:, params:)
+      def initialize(season:, form:)
         @season = season
-        @params = params
-        @team = params[:team]
-        @amount = params[:amount]
+        @form = form
       end
 
       def call
@@ -20,13 +18,21 @@ module Seasons
 
       private
 
-      attr_reader :season, :team, :amount
+      attr_reader :season, :form
 
       def bets
         @bets ||= Queries::Match.by_season_and_team(season, team).map do |match|
           bet = Betting::PlaceBet::EntryPoint.call(match:, params: { bet_amount: amount, team:, bet_type: 'win' })
           Betting::ResolveBet::EntryPoint.call(bet)
         end
+      end
+
+      def team
+        @team ||= form.attributes.to_h.fetch(:team)
+      end
+
+      def amount
+        @amount ||= form.attributes.to_h.fetch(:amount)
       end
 
     end
