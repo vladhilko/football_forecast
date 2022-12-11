@@ -5,6 +5,7 @@ module Seasons
     class EntryPoint < BaseEntryPoint
 
       def initialize(season:, params:)
+        @inputs = Form.new(params:)
         @action = Action.new(season:, params:)
       end
 

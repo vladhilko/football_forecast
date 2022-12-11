@@ -4,7 +4,7 @@ module CreateMatch
   class EntryPoint < BaseEntryPoint
 
     def initialize(season:, params:)
-      @inputs = Inputs.new(params: Struct.new(params).to_h)
+      @inputs = Inputs.new(params:)
       @action = Action.new(season:, inputs:)
     end
 

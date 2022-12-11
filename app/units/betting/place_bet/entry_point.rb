@@ -5,7 +5,7 @@ module Betting
     class EntryPoint < BaseEntryPoint
 
       def initialize(match:, params:)
-        @inputs = Inputs.new(params: Struct.new(params).to_h)
+        @inputs = Inputs.new(params:)
         @action = Action.new(match:, inputs:)
       end
 
