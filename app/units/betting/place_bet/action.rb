@@ -4,9 +4,9 @@ module Betting
   module PlaceBet
     class Action
 
-      def initialize(match:, inputs:)
+      def initialize(match:, form:)
         @match = match
-        @inputs = inputs
+        @form = form
       end
 
       def call
@@ -15,7 +15,7 @@ module Betting
 
       private
 
-      attr_reader :match, :inputs
+      attr_reader :match, :form
 
       def bet
         Bet.new(
@@ -23,7 +23,7 @@ module Betting
           payout_amount:,
           odds:,
           status: 'pending',
-          **inputs.attributes
+          **form.attributes
         )
       end
 
@@ -36,11 +36,11 @@ module Betting
       end
 
       def bet_amount
-        inputs.attributes.to_h.fetch(:bet_amount)
+        form.attributes.to_h.fetch(:bet_amount)
       end
 
       def team
-        inputs.attributes.to_h.fetch(:team)
+        form.attributes.to_h.fetch(:team)
       end
 
     end

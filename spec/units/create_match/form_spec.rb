@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe CreateMatch::Inputs do
+describe CreateMatch::Form do
   describe '#attributes' do
     subject(:attributes) { described_class.new(params:).call.values.data }
 

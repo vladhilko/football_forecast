@@ -2,7 +2,7 @@
 
 module Betting
   module PlaceBet
-    class Inputs < ::Inputs
+    class Form < ::Form
 
       params do
         required(:bet_amount).filled(:decimal)

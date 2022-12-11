@@ -2,7 +2,7 @@
 
 module Seasons
   module CalculateProfit
-    class Form < ::Inputs
+    class Form < ::Form
 
       params do
         required(:amount).filled(:decimal)

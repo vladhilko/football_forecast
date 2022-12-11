@@ -5,8 +5,8 @@ module Betting
     class EntryPoint < BaseEntryPoint
 
       def initialize(match:, params:)
-        @inputs = Inputs.new(params:)
-        @action = Action.new(match:, inputs:)
+        @form = Form.new(params:)
+        @action = Action.new(match:, form:)
       end
 
     end

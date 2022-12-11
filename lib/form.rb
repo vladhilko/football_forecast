@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Inputs < Dry::Validation::Contract
+class Form < Dry::Validation::Contract
 
   option :params
 

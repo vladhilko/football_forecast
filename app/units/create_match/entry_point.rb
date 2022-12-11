@@ -4,8 +4,8 @@ module CreateMatch
   class EntryPoint < BaseEntryPoint
 
     def initialize(season:, params:)
-      @inputs = Inputs.new(params:)
-      @action = Action.new(season:, inputs:)
+      @form = Form.new(params:)
+      @action = Action.new(season:, form:)
     end
 
   end

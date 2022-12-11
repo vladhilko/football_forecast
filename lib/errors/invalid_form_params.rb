@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Errors
-  class InvalidInputsParams < StandardError
+  class InvalidFormParams < StandardError
 
     delegate :to_s, to: :errors
 

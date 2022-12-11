@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-describe Betting::PlaceBet::Inputs do
+describe Betting::PlaceBet::Form do
   describe '#attributes' do
     subject(:attributes) { described_class.new(params:).call.values.data }
 

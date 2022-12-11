@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module CreateMatch
-  class Inputs < ::Inputs
+  class Form < ::Form
 
     params do
       required(:home_team).filled(:string)

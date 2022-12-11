@@ -3,8 +3,8 @@
 module CreateMatch
   class Action
 
-    def initialize(season:, inputs:)
-      @inputs = inputs
+    def initialize(season:, form:)
+      @form = form
       @season = season
     end
 
@@ -16,18 +16,18 @@ module CreateMatch
 
     private
 
-    attr_reader :inputs, :season
+    attr_reader :form, :season
 
     def match
       Match.new(match_attributes)
     end
 
     def match_attributes
-      inputs.attributes.except(:betting_odds).merge(season_id: season.id)
+      form.attributes.except(:betting_odds).merge(season_id: season.id)
     end
 
     def betting_odds_attributes
-      inputs.attributes.fetch(:betting_odds)
+      form.attributes.fetch(:betting_odds)
     end
 
   end
