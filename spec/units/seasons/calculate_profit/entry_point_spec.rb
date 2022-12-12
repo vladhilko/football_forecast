@@ -33,7 +33,7 @@ describe Seasons::CalculateProfit::EntryPoint do
       {
         amount: 100,
         team: 'Arsenal',
-        betting_strategy: 'always_win'
+        bet_strategy: 'always_win'
       }
     end
 

@@ -7,7 +7,7 @@ module Seasons
       params do
         required(:amount).filled(:decimal)
         required(:team).filled(:string)
-        required(:betting_strategy).filled(:string)
+        required(:bet_strategy).filled(:string)
       end
 
     end
