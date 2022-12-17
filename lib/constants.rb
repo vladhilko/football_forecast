@@ -44,7 +44,8 @@ module Constants
 
   def self.betting
     strategies = {
-      always_win: 'always_win'
+      always_win: 'always_win',
+      always_lose: 'always_lose'
     }
 
     OpenStruct.new(

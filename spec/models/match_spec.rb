@@ -83,13 +83,27 @@ RSpec.describe Match, type: :model do
     context 'when Arsenal plays away and win' do
       subject { described_class.new(home_team: 'Chelsea', away_team: 'Arsenal', score: '1:2').result_for('Arsenal') }
 
-      it { is_expected.to be 'win' }
+      it { is_expected.to eq 'win' }
     end
 
     context 'when Arsenal plays away and lose' do
       subject { described_class.new(home_team: 'Chelsea', away_team: 'Arsenal', score: '2:1').result_for('Arsenal') }
 
-      it { is_expected.to be 'lose' }
+      it { is_expected.to eq 'lose' }
+    end
+  end
+
+  describe '#opponent_team(team)' do
+    context 'when team is `Arsenal`' do
+      subject { described_class.new(home_team: 'Chelsea', away_team: 'Arsenal').opponent_team('Arsenal') }
+
+      it { is_expected.to eq 'Chelsea' }
+    end
+
+    context 'when team is `Chelsea`' do
+      subject { described_class.new(home_team: 'Chelsea', away_team: 'Arsenal').opponent_team('Chelsea') }
+
+      it { is_expected.to eq 'Arsenal' }
     end
   end
 end

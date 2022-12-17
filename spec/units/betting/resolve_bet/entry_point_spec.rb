@@ -16,4 +16,13 @@ describe Betting::ResolveBet::EntryPoint do
         .and change { bet.reload.status }.from('pending').to('resolved')
     end
   end
+
+  context 'when bet type is lose, but the team wins' do
+    let(:bet) { create(:bet, match:, team: 'Arsenal', bet_type: 'lose') }
+
+    it 'resolve bet with `lose` result', :aggregate_failures do
+      expect { subject }.to change { bet.reload.result }.from(nil).to('lose')
+        .and change { bet.reload.status }.from('pending').to('resolved')
+    end
+  end
 end

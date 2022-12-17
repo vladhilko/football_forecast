@@ -18,12 +18,16 @@ module Betting
 
       def updated_bet
         bet.status = 'resolved'
-        bet.result = result
+        bet.result = bet_result
 
         bet
       end
 
-      def result
+      def bet_result
+        bet.bet_type == match_result ? 'win' : 'lose'
+      end
+
+      def match_result
         bet.match.result_for(bet.team)
       end
 

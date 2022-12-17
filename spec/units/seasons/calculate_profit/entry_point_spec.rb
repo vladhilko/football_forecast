@@ -38,7 +38,21 @@ describe Seasons::CalculateProfit::EntryPoint do
     end
 
     it 'calculates potentil profit' do
-      expect(subject).to eq(145 - 100)
+      expect(subject).to eq((245 - 100) - 100)
+    end
+  end
+
+  context 'when the user always bet 100$ on Arsenal loss during the whole season' do
+    let(:params) do
+      {
+        amount: 100,
+        team: 'Arsenal',
+        bet_strategy: Constants.betting.strategies.always_lose
+      }
+    end
+
+    it 'calculates potentil profit' do
+      expect(subject).to eq((134 - 100) - 100)
     end
   end
 end

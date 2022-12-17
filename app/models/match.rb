@@ -27,6 +27,10 @@ class Match < ApplicationRecord
     'lose'
   end
 
+  def opponent_team(team)
+    team == home_team ? away_team : home_team
+  end
+
   def home_team?(team)
     home_team == team
   end

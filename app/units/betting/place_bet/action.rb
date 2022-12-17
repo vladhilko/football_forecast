@@ -32,7 +32,18 @@ module Betting
       end
 
       def odds
+        case bet_type
+        when 'win' then team_win_odds
+        when 'lose' then team_lose_odds
+        end
+      end
+
+      def team_win_odds
         match.betting_odds.odds_for(team)
+      end
+
+      def team_lose_odds
+        match.betting_odds.odds_for(match.opponent_team(team))
       end
 
       def bet_amount
@@ -41,6 +52,10 @@ module Betting
 
       def team
         form.attributes.fetch(:team)
+      end
+
+      def bet_type
+        form.attributes.fetch(:bet_type)
       end
 
     end
