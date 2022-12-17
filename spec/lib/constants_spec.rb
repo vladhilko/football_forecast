@@ -66,7 +66,7 @@ RSpec.describe Constants do
   describe 'Constants.betting.strategies' do
     subject { described_class.betting.strategies }
 
-    %w[always_win always_lose].each do |result|
+    %w[always_win always_lose always_draw].each do |result|
       it "returns correct value for #{result} result" do
         expect(subject.public_send(result.to_sym)).to eq(result)
       end
@@ -75,7 +75,7 @@ RSpec.describe Constants do
     describe '.values' do
       subject { described_class.betting.strategies.values }
 
-      it { is_expected.to contain_exactly('always_win', 'always_lose') }
+      it { is_expected.to contain_exactly('always_win', 'always_lose', 'always_draw') }
     end
   end
 end

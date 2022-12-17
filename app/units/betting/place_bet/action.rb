@@ -35,6 +35,7 @@ module Betting
         case bet_type
         when 'win' then team_win_odds
         when 'lose' then team_lose_odds
+        when 'draw' then draw_odds
         end
       end
 
@@ -44,6 +45,10 @@ module Betting
 
       def team_lose_odds
         match.betting_odds.odds_for(match.opponent_team(team))
+      end
+
+      def draw_odds
+        match.betting_odds.draw
       end
 
       def bet_amount

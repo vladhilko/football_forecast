@@ -37,11 +37,42 @@ describe Betting::ResolveBet::EntryPoint do
       end
     end
 
-    context 'when the team plays draw' do
+    context 'when the teams play draw' do
       let(:match) { create(:match, home_team: 'Arsenal', away_team: 'Chelsea', score: '1:1') }
 
       it 'resolve the bet with `lose` result', :aggregate_failures do
         expect { subject }.to change { bet.reload.result }.from(nil).to('lose')
+          .and change { bet.reload.status }.from('pending').to('resolved')
+      end
+    end
+  end
+
+  context 'when bet type is `draw`' do
+    let(:bet) { create(:bet, match:, team: 'Arsenal', bet_type: 'draw') }
+
+    context 'when the team wins' do
+      let(:match) { create(:match, home_team: 'Arsenal', away_team: 'Chelsea', score: '2:1') }
+
+      it 'resolve the bet with `lose` result', :aggregate_failures do
+        expect { subject }.to change { bet.reload.result }.from(nil).to('lose')
+          .and change { bet.reload.status }.from('pending').to('resolved')
+      end
+    end
+
+    context 'when the team loses' do
+      let(:match) { create(:match, home_team: 'Arsenal', away_team: 'Chelsea', score: '1:2') }
+
+      it 'resolve the bet with `lose` result', :aggregate_failures do
+        expect { subject }.to change { bet.reload.result }.from(nil).to('lose')
+          .and change { bet.reload.status }.from('pending').to('resolved')
+      end
+    end
+
+    context 'when the teams play draw' do
+      let(:match) { create(:match, home_team: 'Arsenal', away_team: 'Chelsea', score: '1:1') }
+
+      it 'resolve the bet with `win` result', :aggregate_failures do
+        expect { subject }.to change { bet.reload.result }.from(nil).to('win')
           .and change { bet.reload.status }.from('pending').to('resolved')
       end
     end

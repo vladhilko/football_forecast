@@ -47,6 +47,8 @@ module Seasons
         case bet_strategy
         when Constants.betting.strategies.always_win
           'win'
+        when Constants.betting.strategies.always_draw
+          'draw'
         when Constants.betting.strategies.always_lose
           'lose'
         end

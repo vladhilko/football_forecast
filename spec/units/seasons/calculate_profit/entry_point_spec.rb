@@ -55,4 +55,26 @@ describe Seasons::CalculateProfit::EntryPoint do
       expect(subject).to eq((134 - 100) - 100)
     end
   end
+
+  context 'when the user always bet 100$ on draw during the whole season' do
+    let(:match_3) { create(:match, season:, home_team: 'Chelsea', away_team: 'Arsenal', score: '1:1') }
+    let(:params) do
+      {
+        amount: 100,
+        team: 'Arsenal',
+        bet_strategy: Constants.betting.strategies.always_draw
+      }
+    end
+
+    before do
+      create(:betting_odds, match: match_3,
+                            home_team_win: 1.64,
+                            away_team_win: 3.67,
+                            draw: 3.01)
+    end
+
+    it 'calculates potentil profit' do
+      expect(subject).to eq(301 - 300)
+    end
+  end
 end
