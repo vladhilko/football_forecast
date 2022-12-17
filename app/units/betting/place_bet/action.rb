@@ -36,11 +36,11 @@ module Betting
       end
 
       def bet_amount
-        form.attributes.to_h.fetch(:bet_amount)
+        form.attributes.fetch(:bet_amount)
       end
 
       def team
-        form.attributes.to_h.fetch(:team)
+        form.attributes.fetch(:team)
       end
 
     end

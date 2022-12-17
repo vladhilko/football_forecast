@@ -32,11 +32,11 @@ module Seasons
       end
 
       def team
-        @team ||= form.attributes.to_h.fetch(:team)
+        @team ||= form.attributes.fetch(:team)
       end
 
       def amount
-        @amount ||= form.attributes.to_h.fetch(:amount)
+        @amount ||= form.attributes.fetch(:amount)
       end
 
     end

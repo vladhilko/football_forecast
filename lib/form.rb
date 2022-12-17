@@ -6,7 +6,7 @@ class Form < Dry::Validation::Contract
 
   def call
     super(params).tap do |result|
-      self.attributes = result.values
+      self.attributes = result.values.data
     end
   end
 
