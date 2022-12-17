@@ -41,4 +41,14 @@ module Constants
       pages: OpenStruct.new(values: pages.values, **pages).freeze
     ).freeze
   end
+
+  def self.betting
+    strategies = {
+      always_win: 'always_win'
+    }
+
+    OpenStruct.new(
+      strategies: OpenStruct.new(values: strategies.values, **strategies).freeze
+    ).freeze
+  end
 end

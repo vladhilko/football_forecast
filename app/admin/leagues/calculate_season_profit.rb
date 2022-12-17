@@ -37,7 +37,10 @@ ActiveAdmin.register_page Constants.active_admin.pages.calculate_season_profit d
                        collection: Queries::Match.by_season(params['season_id']).uniq_teams
 
         f.input :amount, label: 'Bet Amount', required: true, input_html: { value: '100' }
-        f.input :bet_strategy, label: 'Bet Strategy', required: true, collection: ['always_win'], include_blank: false
+        f.input :bet_strategy, label: 'Bet Strategy',
+                               required: true,
+                               collection: Constants.betting.strategies.values,
+                               include_blank: false
       end
       f.actions do
         f.submit 'Calculate'
