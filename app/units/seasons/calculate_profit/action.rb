@@ -4,7 +4,11 @@ module Seasons
   module CalculateProfit
     class Action
 
-      def initialize(season:, form:)
+      include BettingDependencies['place_bet', 'resolve_bet']
+
+      def initialize(season:, form:, **deps)
+        super(**deps)
+
         @season = season
         @form = form
       end
@@ -22,8 +26,8 @@ module Seasons
 
       def bets
         @bets ||= Queries::Match.by_season_and_team(season, team).map do |match|
-          bet = Betting::PlaceBet::EntryPoint.call(match:, params: { bet_amount: amount, team:, bet_type: 'win' })
-          Betting::ResolveBet::EntryPoint.call(bet)
+          bet = place_bet.call(match:, params: { bet_amount: amount, team:, bet_type: 'win' })
+          resolve_bet.call(bet)
         end
       end
 

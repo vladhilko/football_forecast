@@ -4,7 +4,12 @@ module Seasons
   module PopulateMatches
     class Action
 
-      def initialize(season:)
+      include SeasonDependencies['complete_matches_population']
+      include MatchDependencies['create_match']
+
+      def initialize(season:, **deps)
+        super(**deps)
+
         @season = season
         @league = season.league
         @country = league.country
@@ -14,10 +19,10 @@ module Seasons
         not_cancelled_matches.lazy.each do |match_params|
           mapped_params = oddsportal_match_params_mapping(match_params)
 
-          CreateMatch::EntryPoint.call(season:, params: mapped_params) unless match_present?(mapped_params)
+          create_match.call(season:, params: mapped_params) unless match_present?(mapped_params)
         end
 
-        Seasons::CompleteMatchesPopulation::EntryPoint.call(season:)
+        complete_matches_population.call(season:)
       end
 
       private
