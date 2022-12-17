@@ -23,6 +23,7 @@ class Match < ApplicationRecord
   def result_for(team)
     return 'win' if home_team?(team) && result == Constants.match.results.home_team_win
     return 'win' if away_team?(team) && result == Constants.match.results.away_team_win
+    return 'draw' if result == Constants.match.results.draw
 
     'lose'
   end
