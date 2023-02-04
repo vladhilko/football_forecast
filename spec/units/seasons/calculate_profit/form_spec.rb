@@ -11,7 +11,7 @@ describe Seasons::CalculateProfit::Form do
       {
         amount: 100,
         team: 'Chelsea',
-        bet_strategy: Constants.betting.strategies.always_win
+        betting_strategy: Constants.betting.strategies.always_win
       }
     end
 
@@ -26,7 +26,7 @@ describe Seasons::CalculateProfit::Form do
         {
           amount: 100,
           team: 'Chelsea',
-          bet_strategy: Constants.betting.strategies.always_win
+          betting_strategy: Constants.betting.strategies.always_win
         }
       )
     end

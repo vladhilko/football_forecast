@@ -39,12 +39,12 @@ module Seasons
         @amount ||= form.attributes.fetch(:amount)
       end
 
-      def bet_strategy
-        @bet_strategy ||= form.attributes.fetch(:bet_strategy)
+      def betting_strategy
+        @betting_strategy ||= form.attributes.fetch(:betting_strategy)
       end
 
       def bet_type
-        case bet_strategy
+        case betting_strategy
         when Constants.betting.strategies.always_win
           'win'
         when Constants.betting.strategies.always_draw

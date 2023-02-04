@@ -28,13 +28,13 @@ describe Admin::CalculateSeasonProfitController, type: :controller do
         params: {
           team: 'Arsenal',
           amount: '100',
-          bet_strategy: Constants.betting.strategies.always_win
+          betting_strategy: Constants.betting.strategies.always_win
         }
       )
 
       post(:calculate_season_profit, params: {
              season_id: season_2008_2009.id, calculate_season_profit: {
-               team: 'Arsenal', amount: 100, bet_strategy: Constants.betting.strategies.always_win
+               team: 'Arsenal', amount: 100, betting_strategy: Constants.betting.strategies.always_win
              }
            })
 

@@ -33,7 +33,7 @@ describe Seasons::CalculateProfit::EntryPoint do
       {
         amount: 100,
         team: 'Arsenal',
-        bet_strategy: Constants.betting.strategies.always_win
+        betting_strategy: Constants.betting.strategies.always_win
       }
     end
 
@@ -47,7 +47,7 @@ describe Seasons::CalculateProfit::EntryPoint do
       {
         amount: 100,
         team: 'Arsenal',
-        bet_strategy: Constants.betting.strategies.always_lose
+        betting_strategy: Constants.betting.strategies.always_lose
       }
     end
 
@@ -62,7 +62,7 @@ describe Seasons::CalculateProfit::EntryPoint do
       {
         amount: 100,
         team: 'Arsenal',
-        bet_strategy: Constants.betting.strategies.always_draw
+        betting_strategy: Constants.betting.strategies.always_draw
       }
     end
 
