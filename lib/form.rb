@@ -5,15 +5,11 @@ class Form < Dry::Validation::Contract
   option :params
 
   def call
-    super(params).tap do |result|
-      self.attributes = result.values.data
-    end
+    super(params)
   end
 
-  attr_reader :attributes
-
-  private
-
-  attr_writer :attributes
+  def attributes
+    @attributes ||= call.values.data
+  end
 
 end

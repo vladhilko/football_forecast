@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe CreateMatch::Form do
   describe '#attributes' do
-    subject(:attributes) { described_class.new(params:).call.values.data }
+    subject(:attributes) { described_class.new(params:).attributes }
 
     before { freeze_time }
 
@@ -72,7 +72,7 @@ describe CreateMatch::Form do
       end
 
       it 'returns betting odds with defalt values' do
-        expect(subject.to_h).to eq(
+        expect(subject).to eq(
           {
             home_team: 'Arsenal',
             away_team: 'Chelsea',

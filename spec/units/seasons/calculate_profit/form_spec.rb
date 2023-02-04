@@ -15,11 +15,7 @@ describe Seasons::CalculateProfit::Form do
       }
     end
 
-    before do
-      form.call
-
-      freeze_time
-    end
+    before { freeze_time }
 
     it 'returns correct attributes' do
       expect(attributes).to eq(

@@ -77,4 +77,20 @@ describe Seasons::CalculateProfit::EntryPoint do
       expect(subject).to eq(301 - 300)
     end
   end
+
+  context 'when `betting_strategy` is invalid' do
+    let(:params) do
+      {
+        amount: 100,
+        team: 'Chelsea',
+        betting_strategy: 'invalid'
+      }
+    end
+
+    it 'raises validation error' do
+      expect { subject }.to raise_error(Errors::InvalidFormParams) do |error|
+        expect(error.errors[:betting_strategy]).to contain_exactly('must be valid')
+      end
+    end
+  end
 end

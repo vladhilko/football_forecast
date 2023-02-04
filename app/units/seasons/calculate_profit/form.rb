@@ -10,6 +10,10 @@ module Seasons
         required(:betting_strategy).filled(:string)
       end
 
+      rule(:betting_strategy) do
+        key.failure('must be valid') unless Constants.betting.strategies.values.include?(value)
+      end
+
     end
   end
 end
