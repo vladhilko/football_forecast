@@ -2,8 +2,8 @@
 
 FactoryBot.define do
   factory :match do
-    home_team { Faker::Sports::Football.unique.team }
-    away_team { Faker::Sports::Football.unique.team }
+    home_team { Faker::Sports::Football.team }
+    away_team { Faker::Sports::Football.team }
     score { '2:1' }
     date { '01.12.2010' }
     time { '17:00' }

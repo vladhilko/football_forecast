@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module CreateMatch
-  class Inputs < ::Inputs
+  class Form < ::Form
 
     params do
       required(:home_team).filled(:string)
@@ -10,9 +10,9 @@ module CreateMatch
       required(:date).filled(:date)
       optional(:time).maybe(:string)
       required(:betting_odds).schema do
-        required(:home_team_win).filled(:decimal)
-        required(:away_team_win).filled(:decimal)
-        required(:draw).filled(:decimal)
+        required(:home_team_win).filled(Types::BettingCoefficient)
+        required(:away_team_win).filled(Types::BettingCoefficient)
+        required(:draw).filled(Types::BettingCoefficient)
       end
     end
 

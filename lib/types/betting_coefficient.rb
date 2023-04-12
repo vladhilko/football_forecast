@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
 module Types
-  BettingCoefficient = Types::String.constructor { _1 || '1' }
+  BettingCoefficient = Dry::Types['coercible.decimal'].constructor do |input, type|
+    type.(input) { 1 }
+  end
 end

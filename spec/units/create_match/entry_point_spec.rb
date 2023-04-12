@@ -61,7 +61,7 @@ describe CreateMatch::EntryPoint do
     end
 
     it 'raises a validation error', :aggregate_failures do
-      expect { subject }.to raise_error(Errors::InvalidInputsParams) do |error|
+      expect { subject }.to raise_error(Errors::InvalidFormParams) do |error|
         expect(error.errors[:score]).to contain_exactly('must be filled')
         expect(error.errors[:date]).to contain_exactly('must be filled')
       end

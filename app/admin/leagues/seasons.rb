@@ -18,6 +18,10 @@ ActiveAdmin.register Season do
   filter :name
   filter :completeness_status, as: :select, collection: -> { Constants.season.completeness_statuses.values }
 
+  action_item :calculate_season_profit, only: :show do
+    link_to 'Calculate Season Profit', admin_season_calculate_season_profit_path(resource)
+  end
+
   action_item :populate_matches, only: :show do
     link_to 'Populate Matches', populate_matches_admin_season_path(resource), method: :post
   end

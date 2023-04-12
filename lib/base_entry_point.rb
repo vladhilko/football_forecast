@@ -6,7 +6,7 @@ class BaseEntryPoint
 
   def call
     authorize!
-    validate_inputs!
+    validate_form!
     action.call
   end
 
@@ -16,17 +16,17 @@ class BaseEntryPoint
 
   private
 
-  attr_accessor :action, :inputs
+  attr_accessor :action, :form
 
-  def validate_inputs!
-    return if inputs.blank?
+  def validate_form!
+    return if form.blank?
 
-    result = inputs.call
-    raise_invalid_inputs_params_error(result) if result.failure?
+    result = form.call
+    raise_invalid_form_params_error(result) if result.failure?
   end
 
-  def raise_invalid_inputs_params_error(result)
-    raise Errors::InvalidInputsParams, result.errors.to_h
+  def raise_invalid_form_params_error(result)
+    raise Errors::InvalidFormParams, result.errors.to_h
   end
 
 end
