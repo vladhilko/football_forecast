@@ -10,7 +10,7 @@ module Constant
     def call
       hash = Constant::Load.new(path).call
 
-      Kernel.const_set('Constants', Model.new(hash))
+      Kernel.const_set('Constants', Model.new(hash).deep_transform)
     end
 
     private
