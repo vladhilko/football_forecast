@@ -1,0 +1,7 @@
+season:
+  completeness_statuses:
+    - initial
+    - full
+    - partial
+    - ongoing
+    - empty

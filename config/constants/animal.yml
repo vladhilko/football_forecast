@@ -1,0 +1,15 @@
+animal:
+  limit: 10
+  types:
+    - cat
+    - dog
+    - pig
+  colors:
+    - green
+    - red
+    - white
+    - green
+  ages:
+    one_week: 1 week
+    one_month: 1 month
+    one_year: 1 year

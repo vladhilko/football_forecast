@@ -1,0 +1,7 @@
+match:
+  result_types:
+    cancelled: 'canc.'
+  results:
+    home_team_win: 'home_team_win'
+    draw: 'draw'
+    away_team_win: 'away_team_win'
