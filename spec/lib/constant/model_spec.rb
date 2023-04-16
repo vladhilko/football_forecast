@@ -14,7 +14,7 @@ RSpec.describe Constant::Model do
             'one_week' => '1 week',
             'one_year' => '1 year'
           },
-          'colors' => %w[green red white green],
+          'colors' => %w[green red white blue],
           'limit' => 10,
           'types' => %w[cat dog pig]
         },
@@ -49,6 +49,12 @@ RSpec.describe Constant::Model do
       expect(constant.car.types.sedan).to eq('sedan')
 
       expect(constant.animal.ages.one_month).to eq('1 month')
+    end
+
+    describe '#values' do
+      it 'returns correct values' do
+        expect(constant.animal.colors.values).to contain_exactly('green', 'red', 'white', 'blue')
+      end
     end
   end
 end

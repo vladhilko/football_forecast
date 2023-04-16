@@ -16,7 +16,7 @@ RSpec.describe Constant::Load do
             'one_week' => '1 week',
             'one_year' => '1 year'
           },
-          'colors' => %w[green red white green],
+          'colors' => %w[green red white blue],
           'limit' => 10,
           'types' => %w[cat dog pig]
         },

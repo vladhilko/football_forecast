@@ -8,7 +8,7 @@ animal:
     - green
     - red
     - white
-    - green
+    - blue
   ages:
     one_week: 1 week
     one_month: 1 month
