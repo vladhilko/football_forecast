@@ -9,7 +9,7 @@ module Constant
 
     def call
       Dir.glob(File.join(path, '*.yml')).reduce({}) do |hash, file_path|
-        hash.merge(YAML.load_file(file_path, symbolize_names: true))
+        hash.merge(YAML.load_file(file_path))
       end
     end
 
