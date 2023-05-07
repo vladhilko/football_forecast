@@ -1,0 +1,5 @@
+betting:
+  strategies:
+    - always_win
+    - always_lose
+    - always_draw

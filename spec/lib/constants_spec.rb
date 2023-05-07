@@ -78,4 +78,20 @@ RSpec.describe Constants do
       it { is_expected.to contain_exactly('always_win', 'always_lose', 'always_draw') }
     end
   end
+
+  describe 'implementation' do
+    it 'raises FrozenError when trying to modify the constant' do
+      expect { described_class.betting.strategies.always_win << 'update' }.to raise_error(FrozenError)
+    end
+
+    it 'raises FrozenError when trying to add something to the constant' do
+      expect { described_class.betting.strategies['new_key'] = 'new_key' }.to raise_error(FrozenError)
+    end
+
+    it 'uses symbol keys instead of string for all nested levels' do
+      expect(described_class.keys.all?(Symbol)).to be true
+      expect(described_class.betting.keys.all?(Symbol)).to be true
+      expect(described_class.betting.strategies.keys.all?(Symbol)).to be true
+    end
+  end
 end
