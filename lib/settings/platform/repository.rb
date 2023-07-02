@@ -11,7 +11,12 @@ module Settings
       class << self
 
         def load!
-          load_files!
+          all_platform_settings_config_files.each do |file_path|
+            define_platform_setting_method(
+              method_name: File.basename(file_path, CONFIG_FILE_EXTENSION),
+              content: YAML.load_file(file_path)
+            )
+          end
         end
 
         def current_platform
@@ -20,21 +25,13 @@ module Settings
 
         private
 
-        def load_files!
-          all_platform_settings_config_files.each do |config_file_path|
-            settings_content = YAML.load_file(config_file_path)
-
-            define_platform_setting_methods(File.basename(config_file_path, CONFIG_FILE_EXTENSION), settings_content)
-          end
-        end
-
         def all_platform_settings_config_files
           Dir.glob(File.join(CONFIG_DIRECTORY, "*#{CONFIG_FILE_EXTENSION}"))
         end
 
-        def define_platform_setting_methods(setting_name, settings_content)
-          deep_freeze(settings_content)
-          define_singleton_method(setting_name) { settings_content[current_platform] }
+        def define_platform_setting_method(method_name:, content:)
+          deep_freeze(content)
+          define_singleton_method(method_name) { content[current_platform] }
         end
 
         def deep_freeze(enum)
