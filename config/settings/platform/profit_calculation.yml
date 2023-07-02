@@ -1,0 +1,15 @@
+first_platform:
+  enabled: true
+  show_full_message: true
+  calculation_strategies:
+    - gross_profit
+    - net_profit
+    - other
+second_platform:
+  enabled: false
+  show_full_message: false
+  calculation_strategies: []
+third_platform:
+  enabled: false
+  show_full_message: false
+  calculation_strategies: []

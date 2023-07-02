@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require_relative Rails.root.join('lib', 'constant', 'load.rb')
-require_relative Rails.root.join('lib', 'constant', 'model.rb')
+require_relative 'load'
+require_relative 'model'
 
 module Constant
   class Initialize

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
-require_relative Rails.root.join('lib', 'constant', 'initialize.rb')
+require 'constant/initialize'
 
-Constant::Initialize.new(path: 'config/constants', constant_name: 'Constants').call
+Rails.application.config.before_initialize do
+  Constant::Initialize.new(path: 'config/constants', constant_name: 'Constants').call
+end

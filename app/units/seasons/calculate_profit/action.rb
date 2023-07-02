@@ -17,7 +17,11 @@ module Seasons
         initial_amount = bets.sum(&:bet_amount)
         final_amount = bets.select { _1.status == 'resolved' && _1.result == 'win' }.sum(&:payout_amount)
 
-        final_amount - initial_amount
+        if Settings::Platform::Repository.profit_calculation.fetch('show_full_message', false)
+          final_amount - initial_amount
+        else
+          "The seasonal profit has been calculated and is equal to #{final_amount - initial_amount}"
+        end
       end
 
       private
