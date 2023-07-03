@@ -39,6 +39,18 @@ RSpec.describe Settings::Platform::Mixin do
         expect(platform_profit_calculation.calculation_strategies).to eq([])
       end
     end
+
+    context 'when platform is third_platform', current_platform: 'third_platform' do
+      it 'returns correct platform specific values' do
+        expect(platform_profit_calculation.enabled).to be false
+        expect(platform_profit_calculation.enabled?).to be false
+
+        expect(platform_profit_calculation.show_full_message).to be true
+        expect(platform_profit_calculation.show_full_message?).to be true
+
+        expect(platform_profit_calculation.calculation_strategies).to eq(['other'])
+      end
+    end
   end
 
   describe '#admin' do
