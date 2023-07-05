@@ -1,0 +1,6 @@
+first_platform:
+  show_profit_calculation_page: true
+second_platform:
+  show_profit_calculation_page: true
+third_platform:
+  show_profit_calculation_page: false

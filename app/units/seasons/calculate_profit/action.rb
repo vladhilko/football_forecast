@@ -5,6 +5,7 @@ module Seasons
     class Action
 
       include BettingDependencies['place_bet', 'resolve_bet']
+      include Settings::Platform::Mixin[:profit_calculation]
 
       def initialize(season:, form:, **deps)
         super(**deps)
@@ -17,7 +18,11 @@ module Seasons
         initial_amount = bets.sum(&:bet_amount)
         final_amount = bets.select { _1.status == 'resolved' && _1.result == 'win' }.sum(&:payout_amount)
 
-        final_amount - initial_amount
+        if platform_profit_calculation.show_full_message?
+          "The seasonal profit has been calculated and is equal to #{final_amount - initial_amount}"
+        else
+          final_amount - initial_amount
+        end
       end
 
       private

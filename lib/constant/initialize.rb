@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require_relative 'load'
+require_relative 'model'
+
 module Constant
   class Initialize
 

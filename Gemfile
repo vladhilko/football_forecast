@@ -79,6 +79,10 @@ group :development, :test do
   gem 'shoulda-matchers', '~> 5.0'
 end
 
+group :test do
+  gem 'climate_control'
+end
+
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'lefthook'
