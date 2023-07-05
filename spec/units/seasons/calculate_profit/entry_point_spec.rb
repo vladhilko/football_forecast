@@ -40,6 +40,16 @@ describe Seasons::CalculateProfit::EntryPoint do
     it 'calculates potentil profit' do
       expect(subject).to eq((245 - 100) - 100)
     end
+
+    context 'when show_full_message platform setting is true' do
+      include_context 'when platform settings are', profit_calculation: {
+        show_full_message: true
+      }
+
+      it 'calculates potentil profit and shows full message' do
+        expect(subject).to eq('The seasonal profit has been calculated and is equal to 45.0')
+      end
+    end
   end
 
   context 'when the user always bet 100$ on Arsenal loss during the whole season' do

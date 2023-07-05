@@ -1,6 +1,6 @@
 first_platform:
   enabled: true
-  show_full_message: true
+  show_full_message: false
   calculation_strategies:
     - gross_profit
     - net_profit

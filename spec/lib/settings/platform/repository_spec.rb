@@ -9,7 +9,7 @@ RSpec.describe Settings::Platform::Repository do
     it 'returns correct platform specific values' do
       expect(subject).to include(
         'enabled' => true,
-        'show_full_message' => true,
+        'show_full_message' => false,
         'calculation_strategies' => %w[gross_profit net_profit other]
       )
     end

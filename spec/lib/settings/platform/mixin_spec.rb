@@ -16,8 +16,8 @@ RSpec.describe Settings::Platform::Mixin do
       expect(platform_profit_calculation.enabled).to be true
       expect(platform_profit_calculation.enabled?).to be true
 
-      expect(platform_profit_calculation.show_full_message).to be true
-      expect(platform_profit_calculation.show_full_message?).to be true
+      expect(platform_profit_calculation.show_full_message).to be false
+      expect(platform_profit_calculation.show_full_message?).to be false
 
       expect(platform_profit_calculation.calculation_strategies).to eq(%w[gross_profit net_profit other])
     end
