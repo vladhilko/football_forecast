@@ -2,6 +2,8 @@
 
 class Season < ApplicationRecord
 
+  include UUID
+
   belongs_to :league
 
   has_many :matches

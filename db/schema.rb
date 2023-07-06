@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_08_104646) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_06_055308) do
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -95,7 +95,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_08_104646) do
     t.datetime "updated_at", null: false
     t.string "completeness_status", default: "initial", null: false
     t.datetime "populated_at"
+    t.string "uuid"
     t.index ["league_id", "name"], name: "index_seasons_on_league_id_and_name", unique: true
+    t.index ["uuid"], name: "index_seasons_on_uuid", unique: true
   end
 
   add_foreign_key "bets", "matches"
