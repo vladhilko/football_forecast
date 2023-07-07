@@ -19,4 +19,5 @@
 
 ActiveSupport::Inflector.inflections do |inflect|
   inflect.uncountable 'betting_odds'
+  inflect.acronym 'UUID'
 end
