@@ -212,6 +212,11 @@ GEM
     faker (3.0.0)
       i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
+    flipper (0.28.0)
+      concurrent-ruby (< 2)
+    flipper-active_record (0.28.0)
+      activerecord (>= 4.2, < 8)
+      flipper (~> 0.28.0)
     formtastic (4.0.0)
       actionpack (>= 5.2.0)
     formtastic_i18n (0.7.0)
@@ -494,6 +499,8 @@ DEPENDENCIES
   dry-validation (~> 1.10.0)
   factory_bot_rails
   faker
+  flipper
+  flipper-active_record
   importmap-rails
   jbuilder
   kimurai!
