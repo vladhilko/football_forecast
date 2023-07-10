@@ -61,6 +61,7 @@ gem 'dry-validation', '~> 1.10.0'
 gem 'sidekiq'
 gem 'flipper'
 gem 'flipper-active_record'
+gem 'flipper-active_support_cache_store'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
