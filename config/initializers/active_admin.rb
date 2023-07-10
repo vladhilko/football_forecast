@@ -244,7 +244,8 @@ ActiveAdmin.setup do |config|
   config.namespace :admin do |admin|
     admin.build_menu do |menu|
       menu.add label: 'Systems' do |submenu|
-        submenu.add label: 'Sidekiq', url: -> { sidekiq_web_path }, html_options: { target: :blank }
+        submenu.add label: 'Sidekiq', url: -> { admin_sidekiq_web_path }, html_options: { target: :blank }
+        submenu.add label: 'Feature Flags', url: -> { '/admin/flipper' }, html_options: { target: :blank }
       end
     end
   end
