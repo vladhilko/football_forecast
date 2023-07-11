@@ -1,0 +1,9 @@
+feature_flags:
+  - name: sample_1
+    description: Description Sample 1
+    expected_expiration_date: 2024-01-01
+    owner: 'team 1'
+  - name: sample_2
+    description: Description Sample 2
+    expected_expiration_date: 2024-01-01
+    owner: 'team 2'

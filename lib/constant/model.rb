@@ -21,9 +21,15 @@ module Constant
     def initialize_value(value)
       case value
       when Hash then Model.new(value).deep_transform
-      when Array then Model.new(value.index_by(&:itself)).deep_transform
+      when Array then initialize_array_values(value)
       else value.freeze
       end
+    end
+
+    def initialize_array_values(array)
+      return array if array.all?(Hash)
+
+      Model.new(array.index_by(&:itself)).deep_transform
     end
 
   end
