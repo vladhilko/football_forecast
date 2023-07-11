@@ -220,6 +220,9 @@ GEM
     flipper-active_support_cache_store (0.28.0)
       activesupport (>= 4.2, < 8)
       flipper (~> 0.28.0)
+    flipper-api (0.28.0)
+      flipper (~> 0.28.0)
+      rack (>= 1.4, < 3)
     flipper-ui (0.28.0)
       erubi (>= 1.0.0, < 2.0.0)
       flipper (~> 0.28.0)
@@ -516,6 +519,7 @@ DEPENDENCIES
   flipper
   flipper-active_record
   flipper-active_support_cache_store
+  flipper-api
   flipper-ui
   importmap-rails
   jbuilder

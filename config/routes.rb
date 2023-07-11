@@ -10,4 +10,6 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
     mount Flipper::UI.app(Flipper) => '/flipper'
   end
+
+  mount Flipper::Api.app(Flipper) => '/flipper/api'
 end

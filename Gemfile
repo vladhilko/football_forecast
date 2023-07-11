@@ -63,6 +63,7 @@ gem 'flipper'
 gem 'flipper-active_record'
 gem 'flipper-active_support_cache_store'
 gem 'flipper-ui'
+gem 'flipper-api'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
