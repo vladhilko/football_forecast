@@ -6,9 +6,10 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  mount Sidekiq::Web => '/admin/sidekiq'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  namespace :admin do
+    mount Sidekiq::Web => '/sidekiq'
+    mount Flipper::UI.app(Flipper) => '/flipper'
+  end
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  mount Flipper::Api.app(Flipper) => '/flipper/api'
 end
