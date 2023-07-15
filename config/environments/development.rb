@@ -71,6 +71,6 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   config.after_initialize do
-    config.temporary_data_store_adapter = TemporaryDataStoreAdapter::Redis.new
+    config.temporary_data_store_adapter = TemporaryDataStoreAdapter::ActiveRecord.new
   end
 end
