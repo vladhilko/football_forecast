@@ -86,6 +86,7 @@ end
 
 group :test do
   gem 'climate_control'
+  gem 'mock_redis'
 end
 
 group :development do
