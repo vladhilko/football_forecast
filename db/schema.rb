@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_14_142730) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_22_144814) do
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -68,6 +68,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_14_142730) do
     t.index ["name"], name: "index_countries_on_name", unique: true
   end
 
+  create_table "data_migrations", primary_key: "version", id: :string, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  end
+
   create_table "flipper_features", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "key", null: false
     t.datetime "created_at", null: false
@@ -111,7 +114,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_14_142730) do
     t.datetime "updated_at", null: false
     t.string "completeness_status", default: "initial", null: false
     t.datetime "populated_at"
-    t.string "uuid"
+    t.string "uuid", null: false
     t.index ["league_id", "name"], name: "index_seasons_on_league_id_and_name", unique: true
     t.index ["uuid"], name: "index_seasons_on_uuid", unique: true
   end
