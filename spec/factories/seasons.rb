@@ -4,6 +4,7 @@ FactoryBot.define do
   factory :season do
     name { '2019/2020' }
     completeness_status { Constants.season.completeness_statuses.initial }
+    uuid { SecureRandom.uuid }
 
     association :league
 
