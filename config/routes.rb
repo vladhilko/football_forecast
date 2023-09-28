@@ -12,4 +12,9 @@ Rails.application.routes.draw do
   end
 
   mount Flipper::Api.app(Flipper) => '/flipper/api'
+
+  get 'api/countries', action: :index, controller: 'api/countries'
+  post 'api/countries', action: :create, controller: 'api/countries'
+  put 'api/countries', action: :update, controller: 'api/countries'
+  delete 'api/countries', action: :destroy, controller: 'api/countries'
 end
