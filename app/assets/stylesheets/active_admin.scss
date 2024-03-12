@@ -14,8 +14,8 @@
 // set a primary color for the active material theme
 // $am-theme-primary: #1d5213;
 
-@import "active_material/src/stylesheets/active_material.scss";
 @import "active_admin/variables";
+@import "active_material/src/stylesheets/active_material.scss";
 @import "active_admin/header";
 
 .status_tag.full { background: $lime-green; }
