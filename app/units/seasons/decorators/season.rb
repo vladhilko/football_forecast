@@ -14,7 +14,7 @@ module Seasons
 
       def season_is_ongoing?
         if take_place_within_one_year?
-          (Date.new(name.to_i)..).include? Date.current
+          (Date.new(name.to_i).beginning_of_year..Date.new(name.to_i).end_of_year).include? Date.current
         elsif take_place_within_two_years?
           first_year, second_year = season_years.map { Date.new(_1.to_i) }
           (first_year..second_year).include?(Date.current)
