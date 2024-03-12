@@ -9,4 +9,8 @@ class BettingOdds < ApplicationRecord
     return away_team_win if match.away_team?(team)
   end
 
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[away_team_win created_at draw home_team_win id match_id updated_at]
+  end
+
 end

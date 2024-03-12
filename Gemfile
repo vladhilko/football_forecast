@@ -3,16 +3,16 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.1.2'
+ruby '3.3.0'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', '~> 7.0.4'
+gem 'rails', '~> 7.1.3.2'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'sprockets-rails'
 
 # Use mysql as the database for Active Record
-gem 'mysql2', '~> 0.5.4'
+gem 'mysql2', '~> 0.5.6'
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem 'puma', '~> 5.0'
@@ -46,12 +46,13 @@ gem 'bootsnap', require: false
 
 gem 'dotenv-rails'
 
-gem 'activeadmin', '~> 2.13.1'
+gem 'activeadmin', '~> 3.2.0'
 gem 'devise', '~> 4.8.1'
 
 # Use Sass to process CSS
 gem 'sassc-rails'
 
+gem 'data_migrate'
 gem 'draper'
 gem 'dry-auto_inject'
 gem 'dry-container'
@@ -63,9 +64,8 @@ gem 'flipper-active_record'
 gem 'flipper-active_support_cache_store'
 gem 'flipper-api'
 gem 'flipper-ui'
-gem 'sidekiq'
-gem 'data_migrate'
 gem 'hairtrigger'
+gem 'sidekiq'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -80,7 +80,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'pry-rails'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 6.1.1'
   gem 'rubocop-rails'
   gem 'rubocop-rspec'
   gem 'shoulda-matchers', '~> 5.0'

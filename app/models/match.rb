@@ -9,6 +9,14 @@ class Match < ApplicationRecord
 
   validates :home_team, uniqueness: { scope: %i[season_id away_team date], case_sensitive: false }
 
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[away_team created_at date home_team id score season_id time updated_at]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    %w[bets betting_odds season]
+  end
+
   def name
     "#{home_team} - #{away_team}"
   end
