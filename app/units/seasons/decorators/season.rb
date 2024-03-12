@@ -12,7 +12,7 @@ module Seasons
 
       private
 
-      def season_is_ongoing?
+      def season_is_ongoing? # rubocop:disable Metrics/AbcSize
         if take_place_within_one_year?
           (Date.new(name.to_i).beginning_of_year..Date.new(name.to_i).end_of_year).include? Date.current
         elsif take_place_within_two_years?

@@ -52,6 +52,7 @@ gem 'devise', '~> 4.8.1'
 # Use Sass to process CSS
 gem 'sassc-rails'
 
+gem 'data_migrate'
 gem 'draper'
 gem 'dry-auto_inject'
 gem 'dry-container'
@@ -63,9 +64,8 @@ gem 'flipper-active_record'
 gem 'flipper-active_support_cache_store'
 gem 'flipper-api'
 gem 'flipper-ui'
-gem 'sidekiq'
-gem 'data_migrate'
 gem 'hairtrigger'
+gem 'sidekiq'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"

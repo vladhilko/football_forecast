@@ -6,7 +6,7 @@
 ### Versions
 
 ```rb
-ruby 3.1.2
+ruby 3.3.0
 rails 7.0.4
 mysql 8.0.31
 ```
@@ -14,7 +14,7 @@ mysql 8.0.31
 ### 1. Install Ruby
 
 ```bash
-$ rvm install 3.1.2
+$ rvm install 3.3.0
 ```
 
 > If the command above doesn't work try the following:
