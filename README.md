@@ -14,7 +14,25 @@ mysql 8.0.31
 ### 1. Install Ruby
 
 ```bash
-rvm install 3.1.2
+$ rvm install 3.1.2
+```
+
+> If the command above doesn't work try the following:
+
+```bash
+$ rvm install 3.3.0 --with-openssl-dir=$(brew --prefix openssl)
+```
+
+### Bundle
+
+```bash
+$ bundle
+```
+
+> If you have a problem with mysql2 then you need to specify the path directly
+
+```bash
+$ gem install mysql2 -- --with-mysql-dir=/opt/homebrew/opt/mysql
 ```
 
 ### 1.1 Yarn install
@@ -88,3 +106,16 @@ foo@bar:~$ rails db:seed
 To visit CRM page:
 
 `http://localhost:3000/admin`
+
+
+### Docker
+
+
+- How to restore a DB dump?
+
+```
+$ docker ps
+$ docker cp /path/to/dump_file.sql container_id:dump_file.sql
+$ docker exec -it container_id bash
+$ mysql -u root -p football_forecast_development < dump_file.sql
+```
