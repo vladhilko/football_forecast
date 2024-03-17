@@ -19,10 +19,12 @@ GIT
       thor
       whenever
 
-PATH
-  remote: gems/oddsportal_scraper
+GIT
+  remote: https://github.com/vladhilko/oddsportal_scraper.git
+  revision: 45996617b2ba5b821a3e020b478957a4b3c15a65
+  branch: main
   specs:
-    oddsportal_scraper (0.2.3)
+    oddsportal_scraper (1.0.0)
       kimurai
       wombat (~> 3.0.0)
 
