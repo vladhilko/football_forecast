@@ -72,7 +72,7 @@ gem 'sidekiq'
 
 # local gems
 gem 'kimurai', github: 'baka-san/kimuraframework', branch: 'master'
-gem 'oddsportal_scraper', path: 'gems/oddsportal_scraper'
+gem 'oddsportal_scraper', github: 'vladhilko/oddsportal_scraper', branch: 'main'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
