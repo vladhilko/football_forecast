@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/vladhilko/oddsportal_scraper.git
-  revision: 119919f7b7850939388fe0186f5f6a6b9cc13c1d
+  revision: 7ef5cb4133136f663a3a9653d7d0884093871028
   branch: phase-4-upgrade-ruby-rails
   specs:
     oddsportal_scraper (2.0.0)
