@@ -65,15 +65,14 @@ gem 'flipper-active_support_cache_store'
 gem 'flipper-api'
 gem 'flipper-ui'
 gem 'hairtrigger'
+gem 'ostruct'
 gem 'sidekiq', '~> 8.1'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
-# local gems
-gem 'kimurai', '~> 2.2'
+# local scraper API; use the ignored Bundler local override for local validation
 gem 'oddsportal_scraper', github: 'vladhilko/oddsportal_scraper', branch: 'phase-4-upgrade-ruby-rails'
-gem 'selenium-webdriver', '~> 4.27.0'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -84,6 +83,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 8.0'
   gem 'rubocop-rails'
   gem 'rubocop-rspec'
+  gem 'selenium-webdriver', '~> 4.27.0'
   gem 'shoulda-matchers'
 end
 

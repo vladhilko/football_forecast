@@ -20,11 +20,11 @@ module Tasks
 
             puts "Start creating matches for #{country.name} #{league.name} #{season.name}:"
 
-            ActiveRecord::Base.transaction { populate_matches }
+            report = ActiveRecord::Base.transaction { populate_matches }
 
             season_matches_count_after_running_task = season.matches.count - initial_season_matches_count
 
-            puts "#{season_matches_count_after_running_task} matches have been added to the DB"
+            puts import_summary(report, season_matches_count_after_running_task)
           end
         end
       end
@@ -35,6 +35,19 @@ module Tasks
 
       def populate_matches
         ::Seasons::PopulateMatches::EntryPoint.call(season:)
+      end
+
+      def import_summary(report, added_count)
+        return "#{added_count} matches have been added to the DB" unless report.is_a?(Hash)
+
+        if report[:fetched_count].zero?
+          return '0 matches have been added to the DB; ' \
+            'OddsPortal returned no matches with available odds'
+        end
+
+        details = "(#{report[:cancelled_count]} cancelled, " \
+          "#{report[:skipped_count]} skipped because required odds were missing)"
+        "#{added_count} matches have been added to the DB #{details}"
       end
 
     end

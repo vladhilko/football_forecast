@@ -29,6 +29,21 @@ bin/bundle install
 yarn install
 ```
 
+The application resolves `oddsportal_scraper` from the Git branch
+`phase-4-upgrade-ruby-rails`. For local development with a sibling checkout,
+set an ignored Bundler override using that checkout's current path:
+
+```bash
+bin/bundle config set --local local.oddsportal_scraper /path/to/oddsportal_scraper
+bin/bundle install
+```
+
+Remove the override after moving the checkout:
+
+```bash
+bin/bundle config unset local.oddsportal_scraper
+```
+
 If Bundler needs to compile `mysql2` from source on Apple Silicon with Ruby
 4.0, configure the C standard and Homebrew's zstd library before installing:
 
@@ -88,8 +103,31 @@ bin/rails assets:precompile
 bin/rails countries:fetch
 bin/rails leagues:fetch_all
 bin/rails seasons:fetch_all
-bin/rails seasons:fetch_all_matches['England', 'Premier League', '2021/2022']
+bin/rails 'seasons:fetch_all_matches[England,Premier League,2021/2022]'
 ```
+
+Quote the complete task name so the shell passes the country, league, and
+season as one Rake argument. The scraper returns an empty list for seasons
+that OddsPortal explicitly reports as having no available odds. It also
+retries a fresh season page when the current-season archive token transiently
+returns that empty response.
+
+The scraper uses HTTP and Nokogiri by default. If a live response requires
+JavaScript rendering for a match import, enable the optional Selenium fallback
+explicitly:
+
+```bash
+ODDSPORTAL_SCRAPER_BROWSER_FALLBACK=1 bin/rails \
+  'seasons:fetch_all_matches[England,Premier League,2021/2022]'
+```
+
+Successful empty catalog responses are reported by the tasks. Transport and
+protocol failures raise `OddsportalScraper::TransportError` or
+`OddsportalScraper::ProtocolError` so imports do not silently create incomplete
+data. Matches without all three required odds are skipped at persistence time;
+cancelled matches keep the existing cancellation behavior. Leave the fallback
+variable unset for normal imports; otherwise Selenium will try to start a
+separate headless Chrome process.
 
 ## API
 

@@ -54,7 +54,7 @@ RSpec.describe 'rake seasons:fetch_all_matches', type: :task do
     let(:expected_output) do
       <<~TEXT
         Start creating matches for England Premier League 2021/2022:
-        2 matches have been added to the DB
+        2 matches have been added to the DB (0 cancelled, 0 skipped because required odds were missing)
       TEXT
     end
 

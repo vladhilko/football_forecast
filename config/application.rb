@@ -26,12 +26,6 @@ module FootballForecast
     # Initialize configuration defaults for Rails 8.1.
     config.load_defaults 8.1
 
-    config.before_initialize do
-      RubyLLM.configure do |ruby_llm_config|
-        ruby_llm_config.use_new_acts_as = true
-      end
-    end
-
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
@@ -42,6 +36,9 @@ module FootballForecast
 
     config.autoload_paths << Rails.root.join('lib')
     config.eager_load_paths << Rails.root.join('lib')
+
+    # This app does not use Active Storage image transformations.
+    config.active_storage.variant_processor = :disabled
 
     # Don't generate system test files.
     config.generators.system_tests = nil

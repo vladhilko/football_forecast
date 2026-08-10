@@ -27,6 +27,7 @@ module Tasks
         puts "Adding #{country.name} leagues"
 
         leagues = OddsportalScraper.leagues(sport: 'soccer', country: country.name)
+        puts "No leagues returned for #{country.name}" if leagues.empty?
         leagues.each do |league|
           League.create(name: league, country:) unless League.exists?(name: league, country:)
         end
