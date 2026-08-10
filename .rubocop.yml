@@ -24,6 +24,7 @@ Metrics/BlockLength:
     - "app/admin/**/*"
     - "config/**/*"
     - "spec/**/*"
+    - "lib/tasks/*.rake"
 Style/Encoding:
   Enabled: false
 Style/LambdaCall:
@@ -91,6 +92,7 @@ Metrics/MethodLength:
 Metrics/AbcSize:
   Exclude:
     - "lib/tasks/**/*.rake"
+    - "db/migrate/*.rb"
 Naming/ConstantName:
   Exclude:
     - "lib/types/**/*.rb"

@@ -37,6 +37,9 @@ module FootballForecast
     config.autoload_paths << Rails.root.join('lib')
     config.eager_load_paths << Rails.root.join('lib')
 
+    # Player replay settlement is scheduled through the existing Sidekiq/Redis service.
+    config.active_job.queue_adapter = :sidekiq
+
     # This app does not use Active Storage image transformations.
     config.active_storage.variant_processor = :disabled
 

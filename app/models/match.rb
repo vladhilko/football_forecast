@@ -6,6 +6,10 @@ class Match < ApplicationRecord
 
   has_one :betting_odds
   has_many :bets
+  has_many :time_travel_session_matches, foreign_key: :source_match_id, dependent: :restrict_with_exception,
+                                         inverse_of: :source_match
+  has_many :wagers, foreign_key: :source_match_id, dependent: :restrict_with_exception,
+                    inverse_of: :source_match
 
   validates :home_team, uniqueness: { scope: %i[season_id away_team date], case_sensitive: false }
 

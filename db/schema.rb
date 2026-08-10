@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2023_07_28_155755) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_10_120000) do
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "author_id"
     t.string "author_type"
@@ -127,9 +127,128 @@ ActiveRecord::Schema[8.1].define(version: 2023_07_28_155755) do
     t.index ["key"], name: "index_temporary_data_entries_on_key", unique: true
   end
 
+  create_table "time_travel_session_matches", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.decimal "away_odds", precision: 10, scale: 4, null: false
+    t.string "away_team", null: false
+    t.datetime "created_at", null: false
+    t.decimal "draw_odds", precision: 10, scale: 4, null: false
+    t.integer "final_away_score", null: false
+    t.integer "final_home_score", null: false
+    t.decimal "home_odds", precision: 10, scale: 4, null: false
+    t.string "home_team", null: false
+    t.datetime "kickoff_at", null: false
+    t.string "kickoff_timezone", default: "Europe/London", null: false
+    t.integer "position", null: false
+    t.bigint "source_match_id", null: false
+    t.json "synthetic_events"
+    t.bigint "time_travel_session_id", null: false
+    t.datetime "updated_at", null: false
+    t.string "uuid", null: false
+    t.index ["source_match_id"], name: "idx_session_matches_source"
+    t.index ["time_travel_session_id", "position"], name: "idx_session_matches_unique_position", unique: true
+    t.index ["time_travel_session_id", "source_match_id"], name: "idx_session_matches_unique_source", unique: true
+    t.index ["time_travel_session_id"], name: "idx_session_matches_session"
+    t.index ["uuid"], name: "index_time_travel_session_matches_on_uuid", unique: true
+  end
+
+  create_table "time_travel_sessions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "league_id", null: false
+    t.integer "lock_version", default: 0, null: false
+    t.string "reveal_mode", default: "honest", null: false
+    t.datetime "reveal_started_at"
+    t.string "round_fingerprint", null: false
+    t.datetime "settled_at"
+    t.string "status", default: "betting", null: false
+    t.date "travel_on", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.string "uuid", null: false
+    t.index ["league_id"], name: "index_time_travel_sessions_on_league_id"
+    t.index ["user_id", "round_fingerprint"], name: "idx_time_sessions_user_round", unique: true
+    t.index ["user_id"], name: "index_time_travel_sessions_on_user_id"
+    t.index ["uuid"], name: "index_time_travel_sessions_on_uuid", unique: true
+  end
+
+  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "display_name", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "preferred_reveal_mode", default: "honest", null: false
+    t.string "status", default: "active", null: false
+    t.datetime "updated_at", null: false
+    t.string "uuid", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["uuid"], name: "index_users_on_uuid", unique: true
+  end
+
+  create_table "wagers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.decimal "decimal_odds", precision: 10, scale: 4, null: false
+    t.bigint "payout_minor", default: 0, null: false
+    t.datetime "placed_at", null: false
+    t.string "placement_key", null: false
+    t.bigint "potential_payout_minor", null: false
+    t.string "selection", null: false
+    t.datetime "settled_at"
+    t.bigint "source_match_id", null: false
+    t.bigint "stake_minor", null: false
+    t.string "status", default: "pending", null: false
+    t.bigint "time_travel_session_id", null: false
+    t.bigint "time_travel_session_match_id", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.string "uuid", null: false
+    t.index ["source_match_id"], name: "index_wagers_on_source_match_id"
+    t.index ["time_travel_session_id"], name: "index_wagers_on_time_travel_session_id"
+    t.index ["time_travel_session_match_id"], name: "idx_wagers_session_match"
+    t.index ["user_id", "placement_key"], name: "idx_wagers_placement_key"
+    t.index ["user_id", "source_match_id"], name: "idx_wagers_one_per_fixture", unique: true
+    t.index ["user_id"], name: "index_wagers_on_user_id"
+    t.index ["uuid"], name: "index_wagers_on_uuid", unique: true
+  end
+
+  create_table "wallet_entries", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "amount_minor", null: false
+    t.bigint "balance_after_minor", null: false
+    t.datetime "created_at", null: false
+    t.string "entry_type", null: false
+    t.string "idempotency_key", null: false
+    t.json "metadata"
+    t.datetime "updated_at", null: false
+    t.bigint "wager_id"
+    t.bigint "wallet_id", null: false
+    t.index ["idempotency_key"], name: "index_wallet_entries_on_idempotency_key", unique: true
+    t.index ["wager_id", "entry_type"], name: "idx_wallet_entries_wager_type", unique: true
+    t.index ["wager_id"], name: "index_wallet_entries_on_wager_id"
+    t.index ["wallet_id"], name: "index_wallet_entries_on_wallet_id"
+  end
+
+  create_table "wallets", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "balance_minor", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.string "currency", default: "PLAY", null: false
+    t.integer "lock_version", default: 0, null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_wallets_on_user_id", unique: true
+  end
+
   add_foreign_key "bets", "matches"
   add_foreign_key "betting_odds", "matches"
   add_foreign_key "leagues", "countries"
   add_foreign_key "matches", "seasons"
   add_foreign_key "seasons", "leagues"
+  add_foreign_key "time_travel_session_matches", "matches", column: "source_match_id"
+  add_foreign_key "time_travel_session_matches", "time_travel_sessions"
+  add_foreign_key "time_travel_sessions", "leagues"
+  add_foreign_key "time_travel_sessions", "users"
+  add_foreign_key "wagers", "matches", column: "source_match_id"
+  add_foreign_key "wagers", "time_travel_session_matches"
+  add_foreign_key "wagers", "time_travel_sessions"
+  add_foreign_key "wagers", "users"
+  add_foreign_key "wallet_entries", "wagers"
+  add_foreign_key "wallet_entries", "wallets"
+  add_foreign_key "wallets", "users"
 end

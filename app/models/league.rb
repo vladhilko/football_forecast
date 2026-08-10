@@ -5,6 +5,7 @@ class League < ApplicationRecord
   belongs_to :country
 
   has_many :seasons
+  has_many :time_travel_sessions, dependent: :restrict_with_exception
 
   validates :name, uniqueness: { scope: :country_id, case_sensitive: false }
 
