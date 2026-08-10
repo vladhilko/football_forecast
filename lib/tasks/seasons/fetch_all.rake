@@ -12,7 +12,7 @@ module Tasks
           task fetch_all: [:environment] do
             initial_seasons_count = Season.count
 
-            League.all.each { create_all_seasons_for(league: _1) }
+            League.find_each { create_all_seasons_for(league: _1) }
 
             seasons_count_after_running_task = Season.count - initial_seasons_count
 

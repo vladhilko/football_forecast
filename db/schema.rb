@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_28_155755) do
+ActiveRecord::Schema[8.1].define(version: 2023_07_28_155755) do
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "namespace"
-    t.text "body"
-    t.string "resource_type"
-    t.bigint "resource_id"
-    t.string "author_type"
     t.bigint "author_id"
+    t.string "author_type"
+    t.text "body"
     t.datetime "created_at", null: false
+    t.string "namespace"
+    t.bigint "resource_id"
+    t.string "resource_type"
     t.datetime "updated_at", null: false
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author"
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
@@ -26,44 +26,44 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_28_155755) do
   end
 
   create_table "admin_users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.datetime "created_at", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.datetime "created_at", null: false
+    t.datetime "reset_password_sent_at"
+    t.string "reset_password_token"
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
   create_table "bets", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "match_id", null: false
     t.decimal "bet_amount", precision: 10, scale: 2, null: false
-    t.decimal "payout_amount", precision: 10, scale: 2, default: "0.0", null: false
-    t.decimal "odds", precision: 10, scale: 2, null: false
-    t.string "team"
     t.string "bet_type", null: false
-    t.string "status", default: "pending", null: false
-    t.string "result"
     t.datetime "created_at", null: false
+    t.bigint "match_id", null: false
+    t.decimal "odds", precision: 10, scale: 2, null: false
+    t.decimal "payout_amount", precision: 10, scale: 2, default: "0.0", null: false
+    t.string "result"
+    t.string "status", default: "pending", null: false
+    t.string "team"
     t.datetime "updated_at", null: false
     t.index ["match_id"], name: "index_bets_on_match_id"
   end
 
   create_table "betting_odds", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "match_id", null: false
-    t.decimal "home_team_win", precision: 10, scale: 2, null: false
     t.decimal "away_team_win", precision: 10, scale: 2, null: false
-    t.decimal "draw", precision: 10, scale: 2, null: false
     t.datetime "created_at", null: false
+    t.decimal "draw", precision: 10, scale: 2, null: false
+    t.decimal "home_team_win", precision: 10, scale: 2, null: false
+    t.bigint "match_id", null: false
     t.datetime "updated_at", null: false
     t.index ["match_id"], name: "index_betting_odds_on_match_id"
   end
 
   create_table "countries", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name", null: false
     t.datetime "created_at", null: false
+    t.string "name", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_countries_on_name", unique: true
   end
@@ -72,57 +72,57 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_28_155755) do
   end
 
   create_table "flipper_features", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "key", null: false
     t.datetime "created_at", null: false
+    t.string "key", null: false
     t.datetime "updated_at", null: false
     t.index ["key"], name: "index_flipper_features_on_key", unique: true
   end
 
   create_table "flipper_gates", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.datetime "created_at", null: false
     t.string "feature_key", null: false
     t.string "key", null: false
-    t.string "value"
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "value"
     t.index ["feature_key", "key", "value"], name: "index_flipper_gates_on_feature_key_and_key_and_value", unique: true
   end
 
   create_table "leagues", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name", null: false
     t.bigint "country_id", null: false
     t.datetime "created_at", null: false
+    t.string "name", null: false
     t.datetime "updated_at", null: false
     t.index ["country_id", "name"], name: "index_leagues_on_country_id_and_name", unique: true
   end
 
   create_table "matches", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "season_id", null: false
-    t.date "date", null: false
-    t.time "time"
-    t.string "home_team", null: false
     t.string "away_team", null: false
-    t.string "score", null: false
     t.datetime "created_at", null: false
+    t.date "date", null: false
+    t.string "home_team", null: false
+    t.string "score", null: false
+    t.bigint "season_id", null: false
+    t.time "time"
     t.datetime "updated_at", null: false
     t.index ["season_id", "home_team", "away_team", "date"], name: "index_matches_on_season_id_and_home_team_and_away_team_and_date", unique: true
   end
 
   create_table "seasons", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name", null: false
-    t.bigint "league_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "completeness_status", default: "initial", null: false
+    t.datetime "created_at", null: false
+    t.bigint "league_id", null: false
+    t.string "name", null: false
     t.datetime "populated_at"
+    t.datetime "updated_at", null: false
     t.string "uuid", null: false
     t.index ["league_id", "name"], name: "index_seasons_on_league_id_and_name", unique: true
     t.index ["uuid"], name: "index_seasons_on_uuid", unique: true
   end
 
   create_table "temporary_data_entries", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "key", null: false
-    t.json "data"
     t.datetime "created_at", null: false
+    t.json "data"
+    t.string "key", null: false
     t.datetime "updated_at", null: false
     t.index ["key"], name: "index_temporary_data_entries_on_key", unique: true
   end

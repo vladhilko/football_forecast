@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-require 'sidekiq/testing'
+require 'sidekiq'
 
-Sidekiq::Testing.inline!
+Sidekiq.testing!(:inline)

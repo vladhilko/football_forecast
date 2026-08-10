@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-Dir[Rails.root.join('spec', 'lib', 'settings', 'platform', 'contracts', '**', '*.rb')].sort.each(&method(:require))
+Dir[Rails.root.join('spec/lib/settings/platform/contracts/**/*.rb')].sort.each(&method(:require))
 
 RSpec.describe Settings::Platform::Contracts do
   Dir.glob('config/settings/platform/*.yml').each do |settings_file|
@@ -22,12 +22,12 @@ RSpec.describe Settings::Platform::Contracts do
 
   context 'when checking existing spec files' do
     let(:spec_contract_file_name_list) do
-      Dir.glob(Rails.root.join('spec', 'lib', 'settings', 'platform', 'contracts', '*.rb'))
+      Dir.glob(Rails.root.join('spec/lib/settings/platform/contracts/*.rb'))
         .map { File.basename(_1, '.rb') }
     end
 
     let(:platform_settings_file_name_list) do
-      Dir.glob(Rails.root.join('config', 'settings', 'platform', '*.yml'))
+      Dir.glob(Rails.root.join('config/settings/platform/*.yml'))
         .map { File.basename(_1, '.yml') }
     end
 

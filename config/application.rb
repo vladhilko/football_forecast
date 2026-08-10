@@ -23,8 +23,14 @@ Bundler.require(*Rails.groups)
 module FootballForecast
   class Application < Rails::Application
 
-    # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.0
+    # Initialize configuration defaults for Rails 8.1.
+    config.load_defaults 8.1
+
+    config.before_initialize do
+      RubyLLM.configure do |ruby_llm_config|
+        ruby_llm_config.use_new_acts_as = true
+      end
+    end
 
     # Configuration for the application, engines, and railties goes here.
     #

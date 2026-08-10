@@ -337,4 +337,17 @@ ActiveAdmin.setup do |config|
   # You can switch to using Webpacker here.
   #
   # config.use_webpacker = true
+
+  # The Dart Sass build is registered under its own logical name so Sprockets
+  # never attempts to compile ActiveAdmin's legacy Sass sources with SassC.
+  config.clear_stylesheets!
+  config.register_stylesheet 'active_admin_dart.css', media: 'all'
+end
+
+# Rails 8 no longer draws the route set while loading the test environment.
+# Load ActiveAdmin's generated resource controllers during application boot so
+# they are available to controller specs and to callers that inspect routes
+# before the first request.
+Rails.application.config.after_initialize do
+  ActiveAdmin.application.load!
 end
