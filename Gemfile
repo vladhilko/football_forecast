@@ -3,19 +3,19 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.3.0'
+ruby '4.0.6'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', '~> 7.1.3.2'
+gem 'rails', '~> 8.1.3'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'sprockets-rails'
 
 # Use mysql as the database for Active Record
-gem 'mysql2', '~> 0.5.6'
+gem 'mysql2', '~> 0.5.7'
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem 'puma', '~> 5.0'
+gem 'puma', '~> 8.0'
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem 'importmap-rails'
@@ -30,7 +30,7 @@ gem 'stimulus-rails'
 gem 'jbuilder'
 
 # Use Redis adapter to run Action Cable in production
-gem 'redis', '~> 4.0'
+gem 'redis', '~> 5.4'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -46,33 +46,33 @@ gem 'bootsnap', require: false
 
 gem 'dotenv-rails'
 
-gem 'activeadmin', '~> 3.2.0'
-gem 'devise', '~> 4.8.1'
+gem 'activeadmin', '~> 3.5'
+gem 'devise', '~> 5.0'
 
 # Use Sass to process CSS
-gem 'sassc-rails'
+gem 'dartsass-rails', '~> 0.5'
 
 gem 'data_migrate'
 gem 'draper'
 gem 'dry-auto_inject'
 gem 'dry-container'
-gem 'dry-struct', '~> 1.4'
-gem 'dry-types', '~> 1.5', '>= 1.5.1'
-gem 'dry-validation', '~> 1.10.0'
+gem 'dry-struct'
+gem 'dry-types'
+gem 'dry-validation'
 gem 'flipper'
 gem 'flipper-active_record'
 gem 'flipper-active_support_cache_store'
 gem 'flipper-api'
 gem 'flipper-ui'
 gem 'hairtrigger'
-gem 'sidekiq'
+gem 'ostruct'
+gem 'sidekiq', '~> 8.1'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
-# local gems
-gem 'kimurai', github: 'baka-san/kimuraframework', branch: 'master'
-gem 'oddsportal_scraper', github: 'vladhilko/oddsportal_scraper', branch: 'main'
+# local scraper API; use the ignored Bundler local override for local validation
+gem 'oddsportal_scraper', github: 'vladhilko/oddsportal_scraper', branch: 'phase-4-upgrade-ruby-rails'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -80,10 +80,11 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'pry-rails'
-  gem 'rspec-rails', '~> 6.1.1'
+  gem 'rspec-rails', '~> 8.0'
   gem 'rubocop-rails'
   gem 'rubocop-rspec'
-  gem 'shoulda-matchers', '~> 5.0'
+  gem 'selenium-webdriver', '~> 4.27.0'
+  gem 'shoulda-matchers'
 end
 
 group :test do

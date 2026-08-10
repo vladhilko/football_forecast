@@ -1,121 +1,151 @@
-# README
+# Football Forecast
 
-## Football Forecast
+Football Forecast is a Rails application for collecting football league,
+season, match, and betting-odds data from the external
+[oddsportal_scraper gem](https://github.com/vladhilko/oddsportal_scraper).
 
+## Versions
 
-### Versions
+| Component | Version |
+| --- | --- |
+| Ruby | 4.0.6 |
+| Rails | 8.1.3.1 |
+| MySQL Docker image | 26.7.0 |
+| Redis Docker image | 8.8.1 |
 
-```rb
-ruby 3.3.0
-rails 7.0.4
-mysql 8.0.31
-```
+## Setup
 
-### 1. Install Ruby
-
-```bash
-$ rvm install 3.3.0
-```
-
-> If the command above doesn't work try the following:
+Install Ruby 4.0.6 and activate it with RVM:
 
 ```bash
-$ rvm install 3.3.0 --with-openssl-dir=$(brew --prefix openssl)
+rvm install 4.0.6
+rvm use 4.0.6
 ```
 
-### Bundle
+Install the Ruby and JavaScript dependencies:
 
 ```bash
-$ bundle
-```
-
-> If you have a problem with mysql2 then you need to specify the path directly
-
-```bash
-$ gem install mysql2 -- --with-mysql-dir=/opt/homebrew/opt/mysql
-```
-
-### 1.1 Yarn install
-
-```bash
+bin/bundle install
 yarn install
 ```
 
-### 2. Start database and redis
+The application resolves `oddsportal_scraper` from the Git branch
+`phase-4-upgrade-ruby-rails`. For local development with a sibling checkout,
+set an ignored Bundler override using that checkout's current path:
 
 ```bash
-docker-compose up mysql8 redis7
+bin/bundle config set --local local.oddsportal_scraper /path/to/oddsportal_scraper
+bin/bundle install
 ```
-### 3. Start server
+
+Remove the override after moving the checkout:
 
 ```bash
-rails s
+bin/bundle config unset local.oddsportal_scraper
 ```
 
-### Check lefthook
+If Bundler needs to compile `mysql2` from source on Apple Silicon with Ruby
+4.0, configure the C standard and Homebrew's zstd library before installing:
 
 ```bash
-lefthook install
-lefthook run pre-commit
+bin/bundle config set --local build.mysql2 \
+  "--with-cflags=-std=gnu17 --with-ldflags=-L/opt/homebrew/opt/zstd/lib"
+bin/bundle install
 ```
 
-### Run Sidekiq
+Start the development services. The new MySQL volume is intentionally named
+`mysql26`; existing MySQL 8 volumes are left untouched because major-version
+upgrades should use a backup/dump-and-restore workflow.
 
 ```bash
-bundle exec sidekiq
+docker compose up -d mysql26 redis8
+docker compose ps
+bin/rails db:prepare
 ```
 
-### OddsportalScraper
+The application uses MySQL on port `3307` and Redis on port `6380`.
+Set `REDIS_URL=redis://127.0.0.1:6380/0` when running a production-like
+environment.
 
-[OddsportalScraper README](gems/oddsportal_scraper/README.md)
+Start the Rails server and background worker in separate terminals:
 
-### Rake Tasks
-
-The following rake task fetch all countries with available football leagues and save them to the database.
-
-```console
-foo@bar:~$ rake countries:fetch
+```bash
+bin/rails server
+bin/bundle exec sidekiq
 ```
 
-The following rake task fetch all football leagues from all countries and save them to the database.
+Visit the admin interface at <http://localhost:3000/admin>. Create the first
+admin user with:
 
-```console
-foo@bar:~$ rake leagues:fetch_all
+```bash
+bin/rails db:seed
 ```
 
-The following rake task fetch all available football seasons and save them to the database.
+Install Git hooks and run the pre-commit checks with:
 
-```console
-foo@bar:~$ rake seasons:fetch_all
+```bash
+bin/bundle exec lefthook install
+bin/bundle exec lefthook run pre-commit
 ```
 
-The following rake task fetch all available football matches for the given season and save them to the database.
+## Tests and checks
 
-```console
-foo@bar:~$ rake seasons:fetch_all_matches['England', 'Premier League', '2021/2022']
+```bash
+bin/bundle exec rspec
+bin/bundle exec rubocop
+bin/rails zeitwerk:check
+bin/rails assets:precompile
 ```
 
-### Development
+## Rake tasks
 
-To create AdminUser:
-
-```console
-foo@bar:~$ rails db:seed
+```bash
+bin/rails countries:fetch
+bin/rails leagues:fetch_all
+bin/rails seasons:fetch_all
+bin/rails 'seasons:fetch_all_matches[England,Premier League,2021/2022]'
 ```
 
-To visit CRM page:
+Quote the complete task name so the shell passes the country, league, and
+season as one Rake argument. The scraper returns an empty list for seasons
+that OddsPortal explicitly reports as having no available odds. It also
+retries a fresh season page when the current-season archive token transiently
+returns that empty response.
 
-`http://localhost:3000/admin`
+The scraper uses HTTP and Nokogiri by default. If a live response requires
+JavaScript rendering for a match import, enable the optional Selenium fallback
+explicitly:
 
-
-### Docker
-
-
-- How to restore a DB dump?
-
+```bash
+ODDSPORTAL_SCRAPER_BROWSER_FALLBACK=1 bin/rails \
+  'seasons:fetch_all_matches[England,Premier League,2021/2022]'
 ```
-$ docker ps
-$ docker cp /path/to/dump_file.sql container_id:dump_file.sql
-$ docker exec -it container_id bash
-$ mysql -u root -p football_forecast_development < dump_file.sql
+
+Successful empty catalog responses are reported by the tasks. Transport and
+protocol failures raise `OddsportalScraper::TransportError` or
+`OddsportalScraper::ProtocolError` so imports do not silently create incomplete
+data. Matches without all three required odds are skipped at persistence time;
+cancelled matches keep the existing cancellation behavior. Leave the fallback
+variable unset for normal imports; otherwise Selenium will try to start a
+separate headless Chrome process.
+
+## API
+
+The countries endpoint is available at:
+
+```text
+GET    /api/countries
+POST   /api/countries
+PUT    /api/countries
+DELETE /api/countries
+```
+
+## Restoring a database dump
+
+Copy a dump into the new MySQL container and restore it into the development
+database:
+
+```bash
+docker compose exec -T mysql26 \
+  mysql -u root football_forecast_development < /path/to/dump_file.sql
 ```

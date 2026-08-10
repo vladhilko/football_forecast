@@ -25,9 +25,7 @@ module TemporaryDataStoreAdapter
       JSON.parse(value)
     end
 
-    def clear
-      @store.clear
-    end
+    delegate :clear, to: :@store
 
   end
 end

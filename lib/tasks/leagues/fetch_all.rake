@@ -12,7 +12,7 @@ module Tasks
           task fetch_all: [:environment] do
             initial_leagues_count = League.count
 
-            Country.all.each { create_all_leagues_for(country: _1) }
+            Country.find_each { create_all_leagues_for(country: _1) }
 
             leagues_count_after_running_task = League.count - initial_leagues_count
 
@@ -27,6 +27,7 @@ module Tasks
         puts "Adding #{country.name} leagues"
 
         leagues = OddsportalScraper.leagues(sport: 'soccer', country: country.name)
+        puts "No leagues returned for #{country.name}" if leagues.empty?
         leagues.each do |league|
           League.create(name: league, country:) unless League.exists?(name: league, country:)
         end

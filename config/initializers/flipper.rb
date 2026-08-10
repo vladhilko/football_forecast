@@ -12,7 +12,7 @@ Rails.application.reloader.to_prepare do
         Flipper::Adapters::ActiveSupportCacheStore.new(
           FeatureFlags::Adapters::ActiveRecordBased.new,
           ActiveSupport::Cache::MemoryStore.new,
-          expires_in: 5.minutes
+          5.minutes
         )
       end
     end

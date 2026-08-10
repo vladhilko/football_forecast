@@ -27,9 +27,18 @@ ActiveAdmin.register Season do
   end
 
   member_action :populate_matches, method: :post do
-    ActiveRecord::Base.transaction { Seasons::PopulateMatches::EntryPoint.call(season: resource) }
+    report = ActiveRecord::Base.transaction { Seasons::PopulateMatches::EntryPoint.call(season: resource) }
 
-    redirect_to admin_season_path(resource), notice: 'Season matches population has been completed'
+    notice = if report.is_a?(Hash) && report[:fetched_count].zero?
+               'No matches with available odds were returned by OddsPortal'
+             elsif report.is_a?(Hash) && report[:skipped_count].positive?
+               "#{report[:persisted_count]} matches added; " \
+                 "#{report[:skipped_count]} skipped because required odds were missing"
+             else
+               'Season matches population has been completed'
+             end
+
+    redirect_to admin_season_path(resource), notice:
   rescue Errors::SeasonIsAlreadyPopulated => e
     redirect_to admin_season_path(resource), alert: e.message
   end

@@ -142,6 +142,46 @@ describe Seasons::PopulateMatches::EntryPoint do
     end
   end
 
+  context 'when a non-cancelled match has incomplete odds' do
+    before do
+      expect(OddsportalScraper).to receive(:matches)
+        .with(sport: 'soccer', country: england.name, league: premier_league.name, season: season.name)
+        .and_return(matches)
+    end
+
+    let(:matches) do
+      [
+        {
+          "match_date": '04 Aug 2021',
+          "match_time": '19:45',
+          "participants": 'Brentford - Fulham',
+          "score": '1:2',
+          "odds": {
+            "home_win": nil,
+            "draw": '3.16',
+            "away_win": '3.82'
+          }
+        },
+        {
+          "match_date": '30 Jul 2021',
+          "match_time": '19:45',
+          "participants": 'Fulham - Brentford',
+          "score": '1:2',
+          "odds": {
+            "home_win": '2.04',
+            "draw": '3.48',
+            "away_win": '3.70'
+          }
+        }
+      ]
+    end
+
+    it 'skips the incomplete row and persists valid matches' do
+      expect { subject }.to change(Match, :count).by(1)
+        .and change(BettingOdds, :count).by(1)
+    end
+  end
+
   context 'when season is already populated' do
     let(:season) { create(:season, :populated, league: premier_league, name: '2021/2022') }
     let(:error_message) { "You can't populate the season that's already populated" }

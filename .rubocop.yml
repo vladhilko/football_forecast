@@ -1,8 +1,9 @@
-require:
+plugins:
   - rubocop-rails
   - rubocop-rspec
 AllCops:
-  TargetRubyVersion: 3.1
+  TargetRubyVersion: 4.0
+  NewCops: disable
   Exclude:
   - "**/scripts/**/**/**/*"
   - "vendor/**/*"
@@ -35,8 +36,6 @@ Style/MissingRespondToMissing:
   Enabled: false
 Rails/DynamicFindBy:
   Enabled: false
-Rails/FilePath:
-  EnforcedStyle: arguments
 Rails/SkipsModelValidations:
   Enabled: false
 Rails/HasAndBelongsToMany:
@@ -67,8 +66,6 @@ Rails/Inquiry:
   Enabled: false
 Gemspec/RequiredRubyVersion:
   Enabled: false
-Rails/FilePath:
-  EnforcedStyle: arguments
 Layout/EmptyLinesAroundClassBody:
   Description: Keeps track of empty lines around class bodies.
   Enabled: true
@@ -117,8 +114,6 @@ RSpec/MultipleMemoizedHelpers:
   Enabled: false
 RSpec/MultipleExpectations:
   Max: 12
-RSpec/FilePath:
-  SpecSuffixOnly: true
 RSpec/NestedGroups:
   Enabled: false
 # RSpec styles from new Rubocop Versions
@@ -129,12 +124,6 @@ RSpec/ChangeByZero: # new in 2.11
 RSpec/IdenticalEqualityAssertion: # new in 2.4
   Enabled: true
 RSpec/SubjectDeclaration: # new in 2.5
-  Enabled: true
-RSpec/FactoryBot/SyntaxMethods: # new in 2.7
-  Enabled: true
-RSpec/Rails/AvoidSetupHook: # new in 2.4
-  Enabled: true
-RSpec/Rails/HaveHttpStatus: # new in 2.12
   Enabled: true
 RSpec/BeEq: # new in 2.9.0
   Enabled: true
@@ -174,6 +163,18 @@ Style/NumberedParameters: # new in 1.22
   Enabled: true
 Style/HashSyntax:
   Enabled: false
+
+# Preserve the established spec names and intentionally dynamic constant setup
+# while keeping the upgraded RuboCop/RSpec rules available elsewhere.
+RSpec/SpecFilePathFormat:
+  Enabled: false
+RSpec/IndexedLet:
+  Enabled: false
+RSpec/RemoveConst:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - "**/db/migrate/**/*.rb"
 
 # Rails styles from new Rubocop Version
 Rails/WhereMissing: # new in 2.16

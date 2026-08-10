@@ -11,6 +11,7 @@ module Tasks
           desc 'Fetches countries from oddsportal and saves them to the database'
           task fetch: [:environment] do
             countries = OddsportalScraper.countries(sport: 'soccer')
+            puts 'OddsPortal returned no countries' if countries.empty?
             countries.reject! { Country.exists?(name: _1) }
             countries.each { Country.create(name: _1) }
 
