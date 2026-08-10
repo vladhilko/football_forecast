@@ -81,6 +81,37 @@ admin user with:
 bin/rails db:seed
 ```
 
+## Time-travel sportsbook
+
+Phase 5 adds a separate React and TypeScript player application in `frontend/`.
+It uses virtual PLAY credits only: there are no deposits, withdrawals, or cash
+redemption. Rails provides the versioned JSON API and continues to serve the
+existing admin application.
+
+For a fresh development database without imported matches, create an
+idempotent ten-match Premier League demonstration round:
+
+```bash
+bin/rails sportsbook:seed_demo
+```
+
+Run Rails on port 3000 and Vite on port 5173 together:
+
+```bash
+bin/dev-sportsbook
+```
+
+Run Sidekiq in another terminal so reveal settlement continues even when the
+browser closes:
+
+```bash
+bin/bundle exec sidekiq
+```
+
+Open <http://127.0.0.1:5173>. Vite proxies `/api` to Rails so the encrypted
+player session cookie remains same-origin. Architecture decisions are recorded
+in `docs/architecture/decisions/`.
+
 Install Git hooks and run the pre-commit checks with:
 
 ```bash
@@ -95,6 +126,10 @@ bin/bundle exec rspec
 bin/bundle exec rubocop
 bin/rails zeitwerk:check
 bin/rails assets:precompile
+npm --prefix frontend run lint
+npm --prefix frontend run typecheck
+npm --prefix frontend test
+npm --prefix frontend run build
 ```
 
 ## Rake tasks

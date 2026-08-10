@@ -21,6 +21,7 @@ FileUtils.chdir APP_ROOT do
 
   puts "\n== Installing JavaScript dependencies =="
   system! "yarn install --frozen-lockfile"
+  system! "npm --prefix frontend ci"
 
   # puts "\n== Copying sample files =="
   # unless File.exist?("config/database.yml")
@@ -38,5 +39,5 @@ FileUtils.chdir APP_ROOT do
 
   puts "\n== Restarting application server =="
   puts "\n== Setup complete =="
-  puts "Run bin/rails server and bin/bundle exec sidekiq in separate terminals."
+  puts "Run bin/dev-sportsbook and bin/bundle exec sidekiq in separate terminals."
 end
